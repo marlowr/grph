@@ -1,0 +1,12 @@
+{
+  "name":"rmarlow/328/grph",
+  "authors": [
+    {
+      "name":"Ryan Marlow",
+      "email":"rmarlow@mail.greenriver.edu"
+    }
+  ],
+  "require":{
+    "bcosca/fatfree-core":"dev-master"
+  }
+}
