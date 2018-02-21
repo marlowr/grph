@@ -20,6 +20,11 @@ $f3->route('GET /', function() {
     echo Template::instance()->render('views/home.html');
 });
 
+$f3->route('GET /project', function() {
+
+    echo Template::instance()->render('views/project.html');
+});
+
 //Run fat free
 $f3->run();
 
