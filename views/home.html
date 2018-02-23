@@ -13,7 +13,7 @@
     <!--stylesheets / link tags loaded here-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="styles/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/index.css?{{ date('l jS \of F Y h:i:s A') }}" />
 
 </head>
 <body >
@@ -38,138 +38,202 @@
     </div>
 </nav>
 <div class="container-fluid" id="main">
-    <div class="row row-offcanvas row-offcanvas-left">
-        <!--/col-->
-
-        <div class="col-md-9 col-lg-10 main">
-            <h1 class="display-4 d-none d-sm-block">
-                Green River Project Hub
-            </h1>
-            <p class="lead d-none d-sm-block">
-                A hub for all of Green River College's current software development projects.
-            </p>
-            <!-- Add Project Button -->
-            <a class="btn btn-success btn-lg" href="#" role="button" data-toggle="modal" data-target="#exampleModal">
-               + Add Project
-            </a>
-                <!-- Add Project Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add New Project</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <!-- Add Project Form -->
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-detail-tab" data-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="true">Details</a>
-                                            <a class="nav-item nav-link" id="nav-client-tab" data-toggle="tab" href="#nav-client" role="tab" aria-controls="nav-client" aria-selected="false">Client Info</a>
-                                            <a class="nav-item nav-link" id="nav-link-tab" data-toggle="tab" href="#nav-link" role="tab" aria-controls="nav-link" aria-selected="false">Links</a>
-                                        </div>
-                                    </nav>
-                                    <form id="addForm" action="#/" method="post">
-                                        <!-- Project Detail Tab Content -->
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">
-                                                <br />
-                                                <div class="col-10">
-                                                    <div class="form-group">
-                                                        <label for="title" class="font-weight-bold">Title</label>
-                                                        <input type="text" class="form-control" id="title" name="title" value="">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="desc" class="font-weight-bold">Description</label>
-                                                        <textarea class="form-control" id="desc" name="desc" rows="3" placeholder=""></textarea>
-                                                    </div>
-                                                </div>
-                                                <h5>Optional</h5>
-                                                <hr>
-                                                <div class="col-6">
-                                                    <div class="form-group d-inline-block">
-                                                        <label for="class" class="font-weight-bold d-inline-block">IT Class</label>
-                                                        <select class="form-control" id="class" name="class">
-                                                            <option>IT 128 - Full Stack Web Dev</option>
-                                                            <option>IT 333 - Data Structure & Algorithms</option>
-                                                            <option>IT 355 - Agile Dev Methods</option>
-                                                            <option>IT 405 - Mobile Dev Frameworks</option>
-                                                            <option>IT 460 - Threat Analysis</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Client Tab Tab Content -->
-                                            <div class="tab-pane fade" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
-                                                <br />
-                                                <div class="col-10">
-                                                    <div class="form-group">
-                                                        <label for="client" class="font-weight-bold">Client/Company Name</label>
-                                                        <input type="text" class="form-control" id="client" name="name" value="">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="location" class="font-weight-bold">Location</label>
-                                                        <input type="text" class="form-control" id="location" name="location" value="">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="site" class="font-weight-bold">Site URL</label>
-                                                        <input type="text" class="form-control" id="site" name="site" value="">
-                                                    </div>
-                                                </div>
-                                                <h4>Contact Info</h4>
-                                                <hr>
-                                                <div class="col-10">
-                                                    <div class="form-group">
-                                                        <label for="name" class="font-weight-bold">Contact Name</label>
-                                                        <input type="text" class="form-control" id="name" name="name" value="">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="font-weight-bold">Email Address</label>
-                                                        <input type="email" class="form-control" id="email" name="email" value="">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="phone" class="font-weight-bold">Phone Number</label>
-                                                        <input type="phone" class="form-control" id="phone" name="email" value="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Project Links Tab Content -->
-                                            <div class="tab-pane fade show active" id="nav-link" role="tabpanel" aria-labelledby="nav-link-tab">
-                                                <br />
-                                                <div class="col-10">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+    <h1>
+        Green River Project Hub
+    </h1>
+    <p>
+        A hub for all of Green River College's current software development projects.
+    </p>
+    <!-- Add Project Button -->
+    <a class="btn btn-success btn-lg" href="#" role="button" data-toggle="modal" data-target="#exampleModal">
+       + Add Project
+    </a>
+        <!-- Add Project Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Project</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <!-- Add Project Form -->
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-detail-tab" data-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="true">Details</a>
+                                    <a class="nav-item nav-link" id="nav-client-tab" data-toggle="tab" href="#nav-client" role="tab" aria-controls="nav-client" aria-selected="false">Client Info</a>
+                                    <a class="nav-item nav-link" id="nav-link-tab" data-toggle="tab" href="#nav-link" role="tab" aria-controls="nav-link" aria-selected="false">Links</a>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" form="addForm" class="btn btn-success">Submit</button>
-                            </div>
+                            </nav>
+                            <form id="addForm" action="./" method="post">
+                                <!-- Project Detail Tab Content -->
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-detail" role="tabpanel"
+                                         aria-labelledby="nav-detail-tab">
+                                        <br />
+                                        <div class="col-10">
+                                            <div class="form-group">
+                                                <label for="title" class="font-weight-bold">Title</label>
+                                                <input type="text" class="form-control" id="title"
+                                                       name="title" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="desc" class="font-weight-bold">Description</label>
+                                                <textarea class="form-control" id="desc"
+                                                          name="description" rows="3" placeholder=""></textarea>
+                                            </div>
+                                        </div>
+                                        <h5>Optional</h5>
+                                        <hr>
+                                        <div class="col-6">
+                                            <div class="form-group d-inline-block">
+                                                <label for="class" class="font-weight-bold d-inline-block">IT Class</label>
+                                                <select class="form-control" id="class"
+                                                        name="class">
+                                                    <option>IT 128 - Full Stack Web Dev</option>
+                                                    <option>IT 333 - Data Structure & Algorithms</option>
+                                                    <option>IT 355 - Agile Dev Methods</option>
+                                                    <option>IT 405 - Mobile Dev Frameworks</option>
+                                                    <option>IT 460 - Threat Analysis</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Client Tab Tab Content -->
+                                    <div class="tab-pane fade" id="nav-client" role="tabpanel"
+                                         aria-labelledby="nav-client-tab">
+                                        <br />
+                                        <div class="col-10">
+                                            <div class="form-group">
+                                                <label for="client" class="font-weight-bold">Client/Company Name</label>
+                                                <input type="text" class="form-control" id="client"
+                                                       name="client" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="location" class="font-weight-bold">Location</label>
+                                                <input type="text" class="form-control" id="location"
+                                                       name="location" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="site" class="font-weight-bold">Site URL</label>
+                                                <input type="text" class="form-control" id="site"
+                                                       name="siteurl" value="">
+                                            </div>
+                                        </div>
+                                        <h4>Contact Info</h4>
+                                        <hr>
+                                        <div class="col-10">
+                                            <div class="form-group">
+                                                <label for="name" class="font-weight-bold">Contact Name</label>
+                                                <input type="text" class="form-control" id="name"
+                                                       name="contactname" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="font-weight-bold">Email Address</label>
+                                                <input type="email" class="form-control" id="email"
+                                                       name="contactemail" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="phone" class="font-weight-bold">Phone Number</label>
+                                                <input type="phone" class="form-control" id="phone"
+                                                       name="contactphone" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Project Links Tab Content -->
+                                    <div class="tab-pane fade" id="nav-link" role="tabpanel"
+                                         aria-labelledby="nav-link-tab">
+                                        <br>
+                                        <div class="col-10">
+                                            <div class="form-group">
+                                                <label for="name" class="font-weight-bold">Trello</label>
+                                                <input type="text" class="form-control" id="trello"
+                                                       name="trello" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email" class="font-weight-bold">GitHub</label>
+                                                <input type="email" class="form-control" id="github"
+                                                       name="github" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>
-            <hr>
-            <!-- Project row Start -->
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="card">
-                        <div class="card-block project">
-                            <h4 class="card-title">Project Name</h4>
-                            <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
-                            <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
-                            <a class="btn btn-success" href="./project" role="button">View Project</a>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" form="addForm" class="btn btn-success">Submit</button>
                     </div>
                 </div>
             </div>
-            <!--/row-->
         </div>
-        <!--/main col-->
+    <hr>
+    <!-- Project row Start -->
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-block project">
+                    <h4 class="card-title">Project Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
+                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
+                    <a class="btn btn-success" href="./project" role="button">View Project</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-block project">
+                    <h4 class="card-title">Project Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
+                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
+                    <a class="btn btn-success" href="./project" role="button">View Project</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-block project">
+                    <h4 class="card-title">Project Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
+                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
+                    <a class="btn btn-success" href="./project" role="button">View Project</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-block project">
+                    <h4 class="card-title">Project Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
+                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
+                    <a class="btn btn-success" href="./project" role="button">View Project</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-block project">
+                    <h4 class="card-title">Project Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
+                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
+                    <a class="btn btn-success" href="./project" role="button">View Project</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-block project">
+                    <h4 class="card-title">Project Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
+                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
+                    <a class="btn btn-success" href="./project" role="button">View Project</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--/container-->

@@ -6,6 +6,10 @@ body {
     padding-top: 70px;
 }
 
+div#main {
+    width: 90%;
+    margin: auto;
+}
 
 .greenrivercolor {
     background-color: #2c882b;
@@ -93,4 +97,8 @@ div.projectsummary {
 
 div.project {
     padding: 15px;
+}
+
+.card {
+    margin-bottom: 15px;
 }
