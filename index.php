@@ -4,29 +4,72 @@
    index.php
 */
 
-//Require the autoload file
-error_reporting(E_ALL);
-ini_set('display_errors',TRUE);
-require_once ('vendor/autoload.php');
+    //Require the autoload file
+    error_reporting(E_ALL);
+    ini_set('display_errors',TRUE);
 
-//Create an instance of the Base class
-$f3 = Base::instance();
+    require_once ('vendor/autoload.php');
+    require_once('/home/cphamgre/config.php');
+    require_once ('model/db.php');
 
-$f3->set('DEBUG',3);
+    //Create an instance of the Base class
+    $f3 = Base::instance();
 
-//Define a default route
-$f3->route('GET /', function() {
+    $f3->set('DEBUG',3);
 
-    echo Template::instance()->render('views/home.html');
-});
+    //Connect to database
+    $dbh = connect();
 
-$f3->route('GET /project', function() {
+    //Define a default route
+    $f3->route('GET|POST /', function($f3) {
 
-    echo Template::instance()->render('views/project.html');
-});
+        if(isset($_POST['submit']))
+        {
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $client = $_POST['client'];
+            $siteurl = $_POST['siteurl'];
+            $trello = $_POST['trello'];
+            $github  = $_POST['github'];
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+            $status = $_POST['status'];
+            $notes = $_POST['notes'];
+
+            //Insert the project into the DB
+            //insertStudent($title, $description, $client, $siteurl, $trello,
+             //   $github, $login, $password, $status, $notes);
+
+            print_r($_POST);
+            echo Template::instance()->render('views/home.html');
+
+        } else {
+
+            echo Template::instance()->render('views/home.html');
+
+        }
+
+
+    });
+/*
+    //Add-Project Route
+    $f3->route('GET|POST /add-project', function($f3) {
+
+
+        else
+        {
+            echo Template::instance()->render('views/home.html');
+        }
+
+    });
+*/
+    $f3->route('GET /project', function() {
+
+        echo Template::instance()->render('views/project.html');
+    });
 
 
 
-//Run fat free
-$f3->run();
+    //Run fat free
+    $f3->run();
 

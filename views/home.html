@@ -87,6 +87,32 @@
                                             <textarea class="form-control" id="desc"
                                                       name="description" rows="3" placeholder=""></textarea>
                                         </div>
+                                        <label>Project Status</label>
+                                        <br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status" id="pending" value="pending" checked>
+                                            <label class="form-check-label" for="pending">
+                                                Pending
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status" id="active" value="active">
+                                            <label class="form-check-label" for="active">
+                                                Active
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status" id="maintenance" value="maintenance">
+                                            <label class="form-check-label" for="maintenance">
+                                                Maintenance
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="status" id="retired" value="retired">
+                                            <label class="form-check-label" for="retired">
+                                                Retired
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Client Tab Content -->
@@ -104,10 +130,14 @@
                                             <input type="text" class="form-control" id="location"
                                                    name="location" value="">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="site">Site URL</label>
-                                            <input type="text" class="form-control" id="site"
-                                                   name="siteurl" value="">
+
+                                        <label for="basic-url">Company URL</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">https://</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="basic-url" name="companyurl"
+                                                   aria-describedby="basic-addon1">
                                         </div>
 
                                         <h4>Contact Info</h4>
@@ -137,10 +167,10 @@
                                         <label for="basic-url">Site URL</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon1">https://</span>
+                                                <span class="input-group-text" id="basic-addon">https://</span>
                                             </div>
-                                            <input type="text" class="form-control" id="basic-url" name="siteurl"
-                                                   aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" id="basicurl" name="siteurl"
+                                                   aria-describedby="basic-addon">
                                         </div>
 
                                         <!-- Trello -->
@@ -214,6 +244,8 @@
                                                 <label for="year">Year</label>
                                                 <select class="form-control" id="year"
                                                         name="year">
+                                                    <option>2015</option>
+                                                    <option>2016</option>
                                                     <option>2017</option>
                                                     <option>2018</option>
                                                     <option>2019</option>
@@ -237,7 +269,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" form="addForm" class="btn btn-success">Submit</button>
+                    <button type="submit" name="submit" form="addForm" class="btn btn-success">Submit</button>
                 </div>
             </div>
         </div>
