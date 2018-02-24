@@ -37,33 +37,28 @@
             $notes = $_POST['notes'];
 
             //Insert the project into the DB
-            //insertStudent($title, $description, $client, $siteurl, $trello,
-             //   $github, $login, $password, $status, $notes);
+            addProject($title, $description, $client, $siteurl, $trello,
+                $github, $login, $password, $status, $notes);
 
-            print_r($_POST);
-            echo Template::instance()->render('views/home.html');
-
-        } else {
-
-            echo Template::instance()->render('views/home.html');
 
         }
 
+            $projects = getProjects();
+            $f3->set('projects', $projects);
 
-    });
-/*
-    //Add-Project Route
-    $f3->route('GET|POST /add-project', function($f3) {
-
-
-        else
-        {
             echo Template::instance()->render('views/home.html');
-        }
+
+
 
     });
-*/
-    $f3->route('GET /project', function() {
+
+    //View Project Route
+    $f3->route('GET /@title', function($f3, $params) {
+
+        $title = $params['title'];
+
+        $project = getProject($title);
+        $f3->set('project', $project);
 
         echo Template::instance()->render('views/project.html');
     });
