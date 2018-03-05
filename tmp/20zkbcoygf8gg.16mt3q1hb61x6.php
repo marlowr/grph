@@ -13,7 +13,7 @@
     <!--stylesheets / link tags loaded here-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="styles/index.css?{{ date('l jS \of F Y h:i:s A') }}" />
+    <link rel="stylesheet" href="styles/index.css?<?= (date('l jS \of F Y h:i:s A')) ?>" />
 
 </head>
 <body >
@@ -282,18 +282,18 @@
     <hr>
     <!-- Project row Start -->
     <div class="row">
-        <repeat group="{{ @projects }}" value="{{ @project }}">
+        <?php foreach (($projects?:[]) as $project): ?>
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-block project">
-                        <h4 class="card-title">{{ @project['title'] }}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ @project['client'] }}</h6>
-                        <p class="card-text">{{ @project['description'] }}</p>
-                        <a class="btn btn-success" href="{{ @BASE }}/{{ @project['title'] }}" role="button">View Project</a>
+                        <h4 class="card-title"><?= ($project['title']) ?></h4>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= ($project['client']) ?></h6>
+                        <p class="card-text"><?= ($project['description']) ?></p>
+                        <a class="btn btn-success" href="<?= ($BASE) ?>/<?= ($project['title']) ?>" role="button">View Project</a>
                     </div>
                 </div>
             </div>
-        </repeat>
+        <?php endforeach; ?>
 
         <!--
         <div class="col-sm-4">

@@ -102,3 +102,19 @@ div.project {
 .card {
     margin-bottom: 15px;
 }
+
+.gray-bg {
+    background-color: rgba(0,0,0,.65);
+}
+
+.green-bg {
+    background-color: #2c882b;
+}
+
+.gray-txt {
+    color: #9d9b98;
+}
+
+.img-resize {
+    width: 100%;
+}

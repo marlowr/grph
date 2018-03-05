@@ -39,10 +39,10 @@
 </nav>
 <div class="card projectsummary">
     <div class="card-block project">
-        <h1 class="card-title">{{ @project['title'] }}</h1>
-        <h6 class="card-subtitle mb-2 text-muted">{{ @project['status'] }}</h6>
-        <p class="card-text">{{ @project['description'] }}</p>
-        <a href="http://www.trello/{{ @project['trello'] }}" class="card-link">http://www.trello/{{ @project['trello'] }}</a>
+        <h1 class="card-title"><?= ($project['title']) ?></h1>
+        <h6 class="card-subtitle mb-2 text-muted"><?= ($project['status']) ?></h6>
+        <p class="card-text"><?= ($project['description']) ?></p>
+        <a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link">http://www.trello/<?= ($project['trello']) ?></a>
         <a href="#" class="card-link">Another link</a>
     </div>
 </div>
