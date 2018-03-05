@@ -72,7 +72,7 @@
                             </div>
                         </nav>
                         <!-- Add Project Form -->
-                        <form id="addForm" action="./" method="post">
+                        <form id="addForm" action="./home" method="post">
                             <!-- Project Detail Tab Content -->
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-detail" role="tabpanel"

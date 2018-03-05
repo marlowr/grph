@@ -67,7 +67,7 @@ $f3->route('GET /@title', function($f3, $params) {
         $title = $params['title'];
         $project = getProject($title);
         $f3->set('project', $project);
-        echo Template::instance()->render('views/project.html');
+        echo Template::instance()->render('views/project2.html');
     } else {
         header('Location: ./');
     }
