@@ -11,6 +11,9 @@
     <!--stylesheets / link tags loaded here-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <?php if ($message != null): ?>
+        <meta http-equiv="refresh" content="3;url=./home" />
+    <?php endif; ?>
     <link href="styles/index.css" rel="stylesheet" />
     <title>Project Name</title>
 </head>
@@ -37,17 +40,33 @@
         </ul>
     </div>
 </nav>
-<div class="card projectsummary">
-    <div class="card-block project">
-        <h1 class="card-title w-50 edit" contenteditable="false"><?= ($project['title']) ?></h1>
-        <h6 class="card-subtitle mb-2 text-muted edit" contenteditable="false"><?= ($project['status']) ?></h6>
-        <p class="card-text edit" contenteditable="false"><?= ($project['description']) ?></p>
-        <a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link edit" contenteditable="false">http://www.trello/<?= ($project['trello']) ?></a>
-        <a href="#" class="card-link edit" contenteditable="false">Another link</a>
-        <input type="button" id="editButton" class="btn btn-success btn-sm float-right" value="Edit"/>
-    </div>
-</div>
-
+<?php if ($message != null): ?>
+    
+        <div class="message">
+            <?= ($message)."
+" ?>
+        </div>
+        <hr>
+        <p class="text-center">You will be redirected in <span id="countdown">3</span> seconds.</p>
+    
+    <?php else: ?>
+        <div class="card projectsummary">
+            <div class="card-block project">
+                <h1 class="card-title w-50 text-capitalize edit" contenteditable="false"><?= ($project['title']) ?></h1>
+                <h6 class="card-subtitle mb-2 text-muted text-capitalize edit" contenteditable="false"><?= ($project['status']) ?></h6>
+                <p class="card-text edit" contenteditable="false"><?= ($project['description']) ?></p>
+                <a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link edit" contenteditable="false">http://www.trello/<?= ($project['trello']) ?></a>
+                <a href="#" class="card-link edit" contenteditable="false">Another link</a>
+                <hr>
+                <form method="POST" action="./<?= ($project['title']) ?>">
+                    <input type="submit" id="delete" name="delete" class="btn btn-success btn-sm float-left"
+                           value="Delete Project"/>
+                </form>
+                <input type="button" id="editButton" class="btn btn-success btn-sm float-right" value="Edit"/>
+            </div>
+        </div>
+    
+<?php endif; ?>
 
 <!--scripts loaded here-->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

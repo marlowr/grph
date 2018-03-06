@@ -20,6 +20,7 @@ $dbh = connect();
 
 $f3->set('logged',false);
 
+//Login page if not already logged in.
 $f3->route('GET|POST /', function($f3) {
     if($_SESSION['logged']) {
         header('Location: ./home');
@@ -29,15 +30,15 @@ $f3->route('GET|POST /', function($f3) {
         if(login($_POST['username'],$_POST['password'])) {
             $_SESSION['logged'] = true;
             $f3->reroute('/home');
-        } else {
-            echo Template::instance()->render('views/login.html');
         }
     } else {
         echo Template::instance()->render('views/login.html');
     }
 });
 
+//If /home is recieved, clears message variable and sends to
 $f3->route('GET|POST /home', function($f3) {
+    $f3->set('message',null);
     if($_SESSION['logged']) {
         if (isset($_POST['submit'])) {
             $title = $_POST['title'];
@@ -61,13 +62,18 @@ $f3->route('GET|POST /home', function($f3) {
         header('Location: ./');
     }
 });
-//View Project Route
-$f3->route('GET /@title', function($f3, $params) {
+
+//View Project Template with the specific project loaded.
+$f3->route('POST|GET /@title', function($f3, $params) {
     if($_SESSION['logged']) {
         $title = $params['title'];
+        if($_POST['delete'] == 'Delete Project') {
+            removeProject($title);
+            $f3->set('message','Project Deleted');
+        }
         $project = getProject($title);
         $f3->set('project', $project);
-        echo Template::instance()->render('views/project2.html');
+        echo Template::instance()->render('views/project.html');
     } else {
         header('Location: ./');
     }

@@ -84,6 +84,21 @@
         return $result;
     }
 
+    function removeProject($title) {
+        global $dbh;
+
+        $sql = "DELETE FROM projects WHERE title = :title";
+
+        //2. Prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        //3. Bind parameters
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+
+        //4. Execute the query
+        $statement->execute();
+    }
+
     //$row = $statement->fetch(PDO::FETCH_ASSOC);
     //echo $row['name']. " the " . $row['color']." ".$row['type'];
 

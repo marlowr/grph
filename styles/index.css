@@ -118,3 +118,9 @@ div.project {
 .img-resize {
     width: 100%;
 }
+
+.message {
+    width: 100%;
+    text-align: center;
+    background-color: indianred;
+}

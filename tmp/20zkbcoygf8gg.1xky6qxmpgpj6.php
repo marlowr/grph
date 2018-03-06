@@ -11,6 +11,9 @@
     <!--stylesheets / link tags loaded here-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <?php if ($message != null): ?>
+        <meta http-equiv="refresh" content="3;url=./home" />
+    <?php endif; ?>
     <link href="styles/index.css" rel="stylesheet" />
     <title>Project Name</title>
 </head>
@@ -37,28 +40,38 @@
         </ul>
     </div>
 </nav>
-<div class="card projectsummary">
-    <div class="card-block project">
-        <h1 class="card-title"><?= ($project['title']) ?></h1>
-        <h6 class="card-subtitle mb-2 text-muted"><?= ($project['status']) ?></h6>
-        <p class="card-text"><?= ($project['description']) ?></p>
-        <a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link">http://www.trello/<?= ($project['trello']) ?></a>
-        <a href="#" class="card-link">Another link</a>
-    </div>
-</div>
+<?php if ($message != null): ?>
+    
+        <div class="message">
+            <?= ($message)."
+" ?>
+        </div>
+        <hr>
+        <p class="text-center">You will be redirected automatically.</p>
+    
+    <?php else: ?>
+        <div class="card projectsummary">
+            <div class="card-block project">
+                <h1 class="card-title w-50 text-capitalize edit" contenteditable="false"><?= ($project['title']) ?></h1>
+                <h6 class="card-subtitle mb-2 text-muted text-capitalize edit" contenteditable="false"><?= ($project['status']) ?></h6>
+                <p class="card-text edit" contenteditable="false"><?= ($project['description']) ?></p>
+                <a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link edit" contenteditable="false">http://www.trello/<?= ($project['trello']) ?></a>
+                <a href="#" class="card-link edit" contenteditable="false">Another link</a>
+                <hr>
+                <form method="POST" action="./<?= ($project['title']) ?>">
+                    <input type="submit" id="delete" name="delete" class="btn btn-success btn-sm float-left"
+                           value="Delete Project"/>
+                </form>
+                <input type="button" id="editButton" class="btn btn-success btn-sm float-right" value="Edit"/>
+            </div>
+        </div>
+    
+<?php endif; ?>
 
-
-<!--
-<div class="card projectsummary">
-    <div class="card-block project">
-        <h1 class="card-title">Project Name</h1>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-    </div>
-</div>
--->
-
+<!--scripts loaded here-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="../grph/js/edit.js"></script>
 </body>
 </html>
