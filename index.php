@@ -23,7 +23,7 @@ $f3->set('logged',false);
 //Login page if not already logged in.
 $f3->route('GET|POST /', function($f3) {
     if($_SESSION['logged']) {
-        header('Location: ./home');
+        $f3->reroute("./home");
     }
 
     if(isset($_POST['submit'])) {
@@ -59,7 +59,7 @@ $f3->route('GET|POST /home', function($f3) {
         $f3->set('projects', $projects);
         echo Template::instance()->render('views/home.html');
     } else {
-        header('Location: ./');
+        $f3->reroute("./");
     }
 });
 
@@ -75,7 +75,7 @@ $f3->route('POST|GET /@title', function($f3, $params) {
         $f3->set('project', $project);
         echo Template::instance()->render('views/project.html');
     } else {
-        header('Location: ./');
+        $f3->reroute("./");
     }
 });
 //Run fat free
