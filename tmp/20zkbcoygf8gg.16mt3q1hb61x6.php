@@ -39,6 +39,7 @@
         </ul>
     </div>
 </nav>
+
 <div class="container-fluid" id="main">
     <h1 class="display-3">
         Green River Project Hub
@@ -92,25 +93,27 @@
                                         <label>Project Status</label>
                                         <br>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="pending" value="pending" checked>
+                                            <input class="form-check-input" type="radio" name="status"  value="pending" checked>
                                             <label class="form-check-label" for="pending">
                                                 Pending
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="active" value="active">
+                                            <input class="form-check-input" type="radio" name="status" value="active">
                                             <label class="form-check-label" for="active">
                                                 Active
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="maintenance" value="maintenance">
+                                            <input class="form-check-input" type="radio" name="status"
+                                                   value="maintenance">
                                             <label class="form-check-label" for="maintenance">
                                                 Maintenance
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="retired" value="retired">
+                                            <input class="form-check-input" type="radio" name="status"
+                                                   value="retired">
                                             <label class="form-check-label" for="retired">
                                                 Retired
                                             </label>
@@ -280,83 +283,119 @@
         </div>
     </div>
     <hr>
-    <!-- Project row Start -->
-    <div class="row">
-        <?php foreach (($projects?:[]) as $project): ?>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-block project">
-                        <h4 class="card-title"><?= ($project['title']) ?></h4>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= ($project['client']) ?></h6>
-                        <p class="card-text"><?= ($project['description']) ?></p>
-                        <a class="btn btn-success" href="<?= ($BASE) ?>/<?= ($project['title']) ?>" role="button">View Project</a>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
 
-        <!--
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block project">
-                    <h4 class="card-title">Project Name</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
-                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
-                    <a class="btn btn-success" href="./project" role="button">View Project</a>
-                </div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#all" role="tab">All Projects</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#active" role="tab">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#pending" role="tab">Pending</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#maintenance" role="tab">Maintenance</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#retired" role="tab">Retired</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="all" role="tabpanel">
+            <div class="row">
+                <?php foreach (($projects?:[]) as $project): ?>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-block project">
+                                    <h4 class="card-title"><?= ($project['title']) ?></h4>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?= ($project['client']) ?></h6>
+                                    <p class="card-text"><?= ($project['description']) ?></p>
+                                    <a class="btn btn-success" href="<?= ($BASE) ?>/<?= ($project['title']) ?>" role="button">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                <?php endforeach; ?>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block project">
-                    <h4 class="card-title">Project Name</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
-                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
-                    <a class="btn btn-success" href="./project" role="button">View Project</a>
-                </div>
+        <div class="tab-pane" id="active" role="tabpanel">
+            <div class="row">
+                <?php foreach (($projects?:[]) as $project): ?>
+                    <?php if ($project['status'] == 'active'): ?>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-block project">
+                                    <h4 class="card-title"><?= ($project['title']) ?></h4>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?= ($project['client']) ?></h6>
+                                    <p class="card-text"><?= ($project['description']) ?></p>
+                                    <a class="btn btn-success" href="<?= ($BASE) ?>/<?= ($project['title']) ?>" role="button">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block project">
-                    <h4 class="card-title">Project Name</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
-                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
-                    <a class="btn btn-success" href="./project" role="button">View Project</a>
-                </div>
+        <div class="tab-pane" id="pending" role="tabpanel">
+            <div class="row">
+                <?php foreach (($projects?:[]) as $project): ?>
+                    <?php if ($project['status'] == 'pending'): ?>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-block project">
+                                    <h4 class="card-title"><?= ($project['title']) ?></h4>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?= ($project['client']) ?></h6>
+                                    <p class="card-text"><?= ($project['description']) ?></p>
+                                    <a class="btn btn-success" href="<?= ($BASE) ?>/<?= ($project['title']) ?>"
+                                       role="button">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block project">
-                    <h4 class="card-title">Project Name</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
-                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
-                    <a class="btn btn-success" href="./project" role="button">View Project</a>
-                </div>
+        <div class="tab-pane" id="maintenance" role="tabpanel">
+            <div class="row">
+                <?php foreach (($projects?:[]) as $project): ?>
+                    <?php if ($project['status'] == 'maintenance'): ?>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-block project">
+                                    <h4 class="card-title"><?= ($project['title']) ?></h4>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?= ($project['client']) ?></h6>
+                                    <p class="card-text"><?= ($project['description']) ?></p>
+                                    <a class="btn btn-success" href="<?= ($BASE) ?>/<?= ($project['title']) ?>"
+                                       role="button">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block project">
-                    <h4 class="card-title">Project Name</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
-                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
-                    <a class="btn btn-success" href="./project" role="button">View Project</a>
-                </div>
+        <div class="tab-pane" id="retired" role="tabpanel">
+            <div class="row">
+                <?php foreach (($projects?:[]) as $project): ?>
+                    <?php if ($project['status'] == 'retired'): ?>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-block project">
+                                    <h4 class="card-title"><?= ($project['title']) ?></h4>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?= ($project['client']) ?></h6>
+                                    <p class="card-text"><?= ($project['description']) ?></p>
+                                    <a class="btn btn-success" href="<?= ($BASE) ?>/<?= ($project['title']) ?>"
+                                       role="button">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-block project">
-                    <h4 class="card-title">Project Name</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Client Name/Company</h6>
-                    <p class="card-text">More Descriptive text regarding project and important information about the project.</p>
-                    <a class="btn btn-success" href="./project" role="button">View Project</a>
-                </div>
-            </div>
-        </div>
-        -->
     </div>
 </div>
 <!--/container-->
