@@ -87,7 +87,7 @@
     function removeProject($title) {
         global $dbh;
 
-        $sql = "DELETE FROM projects WHERE title = :title";
+        $sql = "DELETE FROM projects WHERE title = :title LIMIT 1";
 
         //2. Prepare the statement
         $statement = $dbh->prepare($sql);

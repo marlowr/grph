@@ -9,10 +9,10 @@
     <meta name="google" value="notranslate">
     <link rel="shortcut icon" href="/images/cp_ico.png">
 
-
     <!--stylesheets / link tags loaded here-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="styles/index.css?{{ date('l jS \of F Y h:i:s A') }}" />
 
 </head>
@@ -267,7 +267,7 @@
                                         <div class="form-group">
                                             <label for="notes">Notes</label>
                                             <textarea class="form-control" id="notes"
-                                                      name="description" rows="5" placeholder=""></textarea>
+                                                      name="notes" rows="5" placeholder=""></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -287,126 +287,170 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#all" role="tab">All Projects</a>
+            <a class="nav-link text-success active" data-toggle="tab" href="#all" role="tab">All Projects</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#active" role="tab">Active</a>
+            <a class="nav-link text-success" data-toggle="tab" href="#active" role="tab">Active</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#pending" role="tab">Pending</a>
+            <a class="nav-link text-success" data-toggle="tab" href="#pending" role="tab">Pending</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#maintenance" role="tab">Maintenance</a>
+            <a class="nav-link text-success" data-toggle="tab" href="#maintenance" role="tab">Maintenance</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#retired" role="tab">Retired</a>
+            <a class="nav-link text-success" data-toggle="tab" href="#retired" role="tab">Retired</a>
         </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div class="tab-pane active" id="all" role="tabpanel">
-            <div class="row">
+        <div class="tab-pane active projectstable" id="all" role="tabpanel">
+            <table id="allprojects">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Client</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>View</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <repeat group="{{ @projects }}" value="{{ @project }}">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-block project">
-                                    <h4 class="card-title">{{ @project['title'] }}</h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ @project['client'] }}</h6>
-                                    <p class="card-text">{{ @project['description'] }}</p>
-                                    <a class="btn btn-success" href="{{ @BASE }}/{{ @project['title'] }}" role="button">View Project</a>
-                                </div>
-                            </div>
-                        </div>
+                    <tr>
+                        <td class="text-capitalize">{{ @project['title'] }}</td>
+                        <td class="text-capitalize">{{ @project['client'] }}</td>
+                        <td>{{ @project['description'] }}</td>
+                        <td class="text-capitalize">{{ @project['status'] }}</td>
+                        <td><a class="btn btn-success btn-sm" href="{{ @BASE }}/{{ @project['title'] }}" role="button">View Project</a></td>
+                    </tr>
                 </repeat>
-            </div>
+                </tbody>
+            </table>
         </div>
-        <div class="tab-pane" id="active" role="tabpanel">
-            <div class="row">
+        <div class="tab-pane projectstable" id="active" role="tabpanel">
+            <table id="activeprojects">
+                <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Client</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+                </thead>
+                <tbody>
                 <repeat group="{{ @projects }}" value="{{ @project }}">
                     <check if="{{ @project['status'] == 'active' }}">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-block project">
-                                    <h4 class="card-title">{{ @project['title'] }}</h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ @project['client'] }}</h6>
-                                    <p class="card-text">{{ @project['description'] }}</p>
-                                    <a class="btn btn-success" href="{{ @BASE }}/{{ @project['title'] }}" role="button">View Project</a>
-                                </div>
-                            </div>
-                        </div>
+                        <tr>
+                            <td class="text-capitalize">{{ @project['title'] }}</td>
+                            <td class="text-capitalize">{{ @project['client'] }}</td>
+                            <td>{{ @project['description'] }}</td>
+                            <td class="text-capitalize">{{ @project['status'] }}</td>
+                            <td><a class="btn btn-success btn-sm" href="{{ @BASE }}/{{ @project['title'] }}"
+                                   role="button">View Project</a></td>
+                        </tr>
                     </check>
                 </repeat>
-            </div>
+                </tbody>
+            </table>
         </div>
-        <div class="tab-pane" id="pending" role="tabpanel">
-            <div class="row">
+        <div class="tab-pane projectstable" id="pending" role="tabpanel">
+            <table id="pendingprojects">
+                <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Client</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+                </thead>
+                <tbody>
                 <repeat group="{{ @projects }}" value="{{ @project }}">
                     <check if="{{ @project['status'] == 'pending' }}">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-block project">
-                                    <h4 class="card-title">{{ @project['title'] }}</h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ @project['client'] }}</h6>
-                                    <p class="card-text">{{ @project['description'] }}</p>
-                                    <a class="btn btn-success" href="{{ @BASE }}/{{ @project['title'] }}"
-                                       role="button">View Project</a>
-                                </div>
-                            </div>
-                        </div>
+                        <tr>
+                            <td class="text-capitalize">{{ @project['title'] }}</td>
+                            <td class="text-capitalize">{{ @project['client'] }}</td>
+                            <td>{{ @project['description'] }}</td>
+                            <td class="text-capitalize">{{ @project['status'] }}</td>
+                            <td><a class="btn btn-success btn-sm" href="{{ @BASE }}/{{ @project['title'] }}"
+                                   role="button">View Project</a></td>
+                        </tr>
                     </check>
                 </repeat>
-            </div>
+                </tbody>
+            </table>
         </div>
-        <div class="tab-pane" id="maintenance" role="tabpanel">
-            <div class="row">
+        <div class="tab-pane projectstable" id="maintenance" role="tabpanel">
+            <table id="maintenanceprojects">
+                <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Client</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+                </thead>
+                <tbody>
                 <repeat group="{{ @projects }}" value="{{ @project }}">
                     <check if="{{ @project['status'] == 'maintenance' }}">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-block project">
-                                    <h4 class="card-title">{{ @project['title'] }}</h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ @project['client'] }}</h6>
-                                    <p class="card-text">{{ @project['description'] }}</p>
-                                    <a class="btn btn-success" href="{{ @BASE }}/{{ @project['title'] }}"
-                                       role="button">View Project</a>
-                                </div>
-                            </div>
-                        </div>
+                        <tr>
+                            <td class="text-capitalize">{{ @project['title'] }}</td>
+                            <td class="text-capitalize">{{ @project['client'] }}</td>
+                            <td>{{ @project['description'] }}</td>
+                            <td class="text-capitalize">{{ @project['status'] }}</td>
+                            <td><a class="btn btn-success btn-sm" href="{{ @BASE }}/{{ @project['title'] }}"
+                                   role="button">View Project</a></td>
+                        </tr>
                     </check>
                 </repeat>
-            </div>
+                </tbody>
+            </table>
         </div>
-        <div class="tab-pane" id="retired" role="tabpanel">
-            <div class="row">
+        <div class="tab-pane projectstable" id="retired" role="tabpanel">
+            <table id="retiredprojects">
+                <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Client</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+                </thead>
+                <tbody>
                 <repeat group="{{ @projects }}" value="{{ @project }}">
                     <check if="{{ @project['status'] == 'retired' }}">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-block project">
-                                    <h4 class="card-title">{{ @project['title'] }}</h4>
-                                    <h6 class="card-subtitle mb-2 text-muted">{{ @project['client'] }}</h6>
-                                    <p class="card-text">{{ @project['description'] }}</p>
-                                    <a class="btn btn-success" href="{{ @BASE }}/{{ @project['title'] }}"
-                                       role="button">View Project</a>
-                                </div>
-                            </div>
-                        </div>
+                        <tr>
+                            <td class="text-capitalize">{{ @project['title'] }}</td>
+                            <td class="text-capitalize">{{ @project['client'] }}</td>
+                            <td>{{ @project['description'] }}</td>
+                            <td class="text-capitalize">{{ @project['status'] }}</td>
+                            <td><a class="btn btn-success btn-sm" href="{{ @BASE }}/{{ @project['title'] }}"
+                                   role="button">View Project</a></td>
+                        </tr>
                     </check>
                 </repeat>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 <!--/container-->
+<br>
 <footer class="container-fluid">
     <p class="text-right small">©2018 Green River College</p>
 </footer>
+
 
 <!--scripts loaded here-->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>

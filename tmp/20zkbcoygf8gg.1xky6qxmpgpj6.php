@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <?php if ($message != null): ?>
-        <meta http-equiv="refresh" content="3;url=./home" />
+        <meta http-equiv="refresh" content="1;url=./home" />
     <?php endif; ?>
     <link href="styles/index.css" rel="stylesheet" />
     <title>Project Name</title>
@@ -59,8 +59,30 @@
                 <a href="#" class="card-link edit" contenteditable="false">Another link</a>
                 <hr>
                 <form method="POST" action="./<?= ($project['title']) ?>">
-                    <input type="submit" id="delete" name="delete" class="btn btn-success btn-sm float-left"
-                           value="Delete Project"/>
+                    <button type="button" class="btn btn-success btn-sm float-left" data-toggle="modal" data-target="#deleteProject">
+                        Delete Project
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="deleteProjectLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteProjectLabel">Confirm</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete <?= ($project['title']) ?>?
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" id="delete" name="delete"
+                                           class="btn btn-success btn-sm float-left"
+                                           value="Delete Project"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 <input type="button" id="editButton" class="btn btn-success btn-sm float-right" value="Edit"/>
             </div>

@@ -54,6 +54,7 @@ $f3->route('GET|POST /home', function($f3) {
             //Insert the project into the DB
             addProject($title, $description, $client, $siteurl, $trello,
                 $github, $login, $password, $status, $notes);
+
         }
         $projects = getProjects();
         $f3->set('projects', $projects);
@@ -67,8 +68,9 @@ $f3->route('GET|POST /home', function($f3) {
 $f3->route('POST|GET /@title', function($f3, $params) {
     if($_SESSION['logged']) {
         $title = $params['title'];
+        //If the project has just been deleted, show message.
         if($_POST['delete'] == 'Delete Project') {
-            removeProject($title);
+            removeProject($title,$desc);
             $f3->set('message','Project Deleted');
         }
         $project = getProject($title);
