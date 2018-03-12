@@ -66,10 +66,14 @@
                         <!-- Add Project Form Tabs -->
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-detail-tab" data-toggle="tab" href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="true">Details</a>
-                                <a class="nav-item nav-link" id="nav-client-tab" data-toggle="tab" href="#nav-client" role="tab" aria-controls="nav-client" aria-selected="false">Client Info</a>
-                                <a class="nav-item nav-link" id="nav-link-tab" data-toggle="tab" href="#nav-link" role="tab" aria-controls="nav-link" aria-selected="false">Links</a>
-                                <a class="nav-item nav-link" id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">History</a>
+                                <a class="nav-item nav-link active text-success" id="nav-detail-tab" data-toggle="tab"
+                                   href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="true">Details</a>
+                                <a class="nav-item nav-link text-success" id="nav-client-tab" data-toggle="tab"
+                                   href="#nav-client" role="tab" aria-controls="nav-client" aria-selected="false">Client Info</a>
+                                <a class="nav-item nav-link text-success" id="nav-link-tab" data-toggle="tab"
+                                   href="#nav-link" role="tab" aria-controls="nav-link" aria-selected="false">Links</a>
+                                <a class="nav-item nav-link text-success" id="nav-history-tab" data-toggle="tab"
+                                   href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">History</a>
                             </div>
                         </nav>
                         <!-- Add Project Form -->
@@ -177,6 +181,9 @@
                                             <input type="text" class="form-control" id="basicurl" name="siteurl"
                                                    aria-describedby="basic-addon">
                                         </div>
+                                        <div id="add-url-box"></div>
+                                        <button type="button" id="add-url" class="btn btn-outline-success btn-sm btn-block">Add another URL</button>
+                                        <br>
 
                                         <!-- Trello -->
                                         <label for="trello-url">Trello</label>
@@ -187,6 +194,9 @@
                                             <input type="text" class="form-control" id="trello-url" name="trello"
                                                    aria-describedby="basic-addon2">
                                         </div>
+                                        <div id="add-trello-box"></div>
+                                        <button type="button" id="add-trello" class="btn btn-outline-success btn-sm btn-block">Add another URL</button>
+                                        <br>
 
                                         <!-- GitHub -->
                                         <label for="github-url">GitHub</label>
@@ -197,6 +207,9 @@
                                             <input type="text" class="form-control" id="github-url" name="github"
                                                    aria-describedby="basic-addon3">
                                         </div>
+                                        <div id="add-github-box"></div>
+                                        <button type="button" id="add-github" class="btn btn-outline-success btn-sm btn-block">Add another URL</button>
+                                        <br>
 
                                         <!-- Login Credentials -->
                                         <h4>Login Credentials</h4>
@@ -452,5 +465,41 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="js/home.js"></script>
+
+<script>
+    //add another site url
+    $("#add-url").click(function() {
+        $("#add-url-box").append("<div class=\"input-group mb-3\">" +
+                                    "<div class=\"input-group-prepend\">\n" +
+                                        "<span class=\"input-group-text\" id=\"basic-addon\">https://</span>\n" +
+                                    "</div>\n" +
+                                        "<input type=\"text\" class=\"form-control\" id=\"basicurl\" name=\"siteurl\"\n" +
+                                        "aria-describedby=\"basic-addon\">\n" +
+                                    "</div>");
+    });
+
+    //add another trello url
+    $("#add-trello").click(function() {
+        $("#add-trello-box").append("<div class=\"input-group mb-3\">" +
+                                        "<div class=\"input-group-prepend\">\n" +
+                                            "<span class=\"input-group-text\" id=\"basic-addon2\">https://trello.com/</span>\n" +
+                                        "</div>\n" +
+                                            "<input type=\"text\" class=\"form-control\" id=\"trello-url\" name=\"trello\"\n" +
+                                            "aria-describedby=\"basic-addon2\">\n" +
+                                    "</div>");
+    });
+
+    //add another github url
+    $("#add-github").click(function() {
+        $("#add-github-box").append("<div class=\"input-group mb-3\">" +
+                                        "<div class=\"input-group-prepend\">\n" +
+                                            "<span class=\"input-group-text\" id=\"basic-addon3\">https://github.com/</span>\n" +
+                                        "</div>\n" +
+                                            "<input type=\"text\" class=\"form-control\" id=\"github-url\" name=\"github\"\n" +
+                                            "aria-describedby=\"basic-addon3\">\n" +
+                                    "</div>");
+    });
+</script>
+
 </body>
 </html>

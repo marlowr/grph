@@ -99,6 +99,43 @@
         $statement->execute();
     }
 
+    function updateProject($title, $description, $client, $siteurl, $trello,
+                        $github, $login, $password, $status, $notes) {
+        global $dbh;
+
+        //Define query
+        $sql = "UPDATE projects
+                SET title=:title,
+                    description=:description,
+                    client=:client,
+                    siteurl=:siteurl,
+                    trello=:trello,
+                    github=:github,
+                    login=:login,
+                    password=:password,
+                    status=:status,
+                    notes=:notes
+                     WHERE title=:title";
+
+        //prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        $statement->bindParam(':title',$title, PDO::PARAM_STR);
+        $statement->bindParam(':description',$description, PDO::PARAM_STR);
+        $statement->bindParam(':client',$client, PDO::PARAM_STR);
+        $statement->bindParam(':siteurl',$siteurl, PDO::PARAM_STR);
+        $statement->bindParam(':trello',$trello, PDO::PARAM_STR);
+        $statement->bindParam(':github',$github, PDO::PARAM_STR);
+        $statement->bindParam(':login',$login, PDO::PARAM_STR);
+        $statement->bindParam(':password',$password, PDO::PARAM_STR);
+        $statement->bindParam(':status',$status,PDO::PARAM_STR);
+        $statement->bindParam(':notes',$notes, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+
+}
+
     //$row = $statement->fetch(PDO::FETCH_ASSOC);
     //echo $row['name']. " the " . $row['color']." ".$row['type'];
 

@@ -52,10 +52,10 @@
     <?php else: ?>
         <div class="card projectsummary">
             <div class="card-block project">
-                <h1 class="card-title w-50 text-capitalize edit" contenteditable="false"><?= ($project['title']) ?></h1>
-                <h6 class="card-subtitle mb-2 text-muted text-capitalize edit" contenteditable="false"><?= ($project['status']) ?></h6>
-                <p class="card-text edit" contenteditable="false"><?= ($project['description']) ?></p>
-                <a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link edit" contenteditable="false">http://www.trello/<?= ($project['trello']) ?></a>
+                <h1 class="card-title w-50 text-capitalize" id="title"><?= ($project['title']) ?></h1>
+                <h6 class="card-subtitle mb-2 text-muted text-capitalize edit" contenteditable="false" id="status"><?= ($project['status']) ?></h6>
+                <p class="card-text edit" contenteditable="false" id="description"><?= ($project['description']) ?></p>
+                <span>Trello: </span><a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link edit" contenteditable="false" id="trello"><?= ($project['trello']) ?></a>
                 <a href="#" class="card-link edit" contenteditable="false">Another link</a>
                 <hr>
                 <form method="POST" action="./<?= ($project['title']) ?>">
