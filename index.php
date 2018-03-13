@@ -8,9 +8,10 @@ error_reporting(E_ALL);
 ini_set('display_errors',TRUE);
 session_start();
 require_once ('vendor/autoload.php');
-require_once('/home/rmarlowg/config.php');
+require_once('/home/cphamgre/config.php');
 require_once ('model/db.php');
 require_once ('model/login.php');
+require_once ('model/validation.php');
 //Create an instance of the Base class
 $f3 = Base::instance();
 $f3->set('DEBUG',3);
@@ -51,9 +52,115 @@ $f3->route('GET|POST /home', function($f3) {
             $password = $_POST['password'];
             $status = $_POST['status'];
             $notes = $_POST['notes'];
-            //Insert the project into the DB
-            addProject($title, $description, $client, $siteurl, $trello,
-                $github, $login, $password, $status, $notes);
+            $location = $_POST['location'];
+            $companyurl = $_POST['companyurl'];
+            $contactname = $_POST['contactname'];
+            $contactemail = $_POST['contactemail'];
+            $contactphone = $_POST['contactphone'];
+            $instructor = $_POST['instructor'];
+            $class = $_POST['class'];
+            $quarter = $_POST['quarter'];
+            $years = $_POST['year'];
+
+            $new_link_ids = array();
+            $old_link_ids = array();
+
+            //trims company url
+            if ($companyurl != "")
+            {
+                $companyurl = trimLink($companyurl);
+            }
+
+            //if the "Choose.." options are chosen, sets value to ""
+            if ($class === "Choose...") {
+                $class = "";
+            }
+            if ($quarter === "Choose...") {
+                $quarter = "";
+            }
+            if ($years === "Choose...") {
+                $years = "";
+            }
+
+            //if admin enters a trello link, it adds to links database table if it doesn't exist
+            if (!empty($trello)) {
+
+                foreach ($trello as $link) {
+                    if ($link != "") {
+                        $link = trimTrello($link);
+
+                        //Checks to see if the link exists in the Link table
+                        $numLinks = getNumOfLinks($link);
+
+                        //If not, it inserts the new link in the link table database
+                        if ($numLinks === 0) {
+                            $id = addLink("trello", $link);
+
+                            $new_link_ids[] = $id;
+                        } else {
+                            $old_link_ids[] = getLinkId($link);
+                        }
+                    }
+                }
+            }
+
+            //if admin enters a github link, it adds to links database table if it doesn't exist
+            if (!empty($github)) {
+                foreach ($github as $link) {
+                    if ($link != "") {
+                        $link = trimGitHub($link);
+
+                        //Checks to see if the link exists in the Link table
+                        $numLinks = getNumOfLinks($link);
+
+                        //If not, it inserts the new link in the link table database
+                        if ($numLinks === 0) {
+                            $id = addLink("github", $link);
+                            $new_link_ids[] = $id;
+                        } else {
+                            $old_link_ids[] = getLinkId($link);
+                        }
+                    }
+                }
+            }
+
+            //if admin enters a site url link, it adds to links database table if it doesn't exist
+            if (!empty($siteurl)) {
+                foreach ($siteurl as $link) {
+                    if ($link != "") {
+                        $link = trimLink($link);
+
+                        //Checks to see if the link exists in the Link table
+                        $numLinks = getNumOfLinks($link);
+                        //If not, it inserts the new link in the link table database
+                        if ($numLinks === 0) {
+                            $id = addLink("siteurl", $link);
+                            $new_link_ids[] = $id;
+                        } else {
+                            $old_link_ids[] = getLinkId($link);
+                        }
+                    }
+
+                }
+            }
+
+            //insert the project into the DB
+            $project_id = addProject($title, $description, $client, $login, $password, $status, $notes,
+                $location, $companyurl, $contactname, $contactemail, $contactphone, $instructor,
+                $class, $quarter, $years);
+
+
+            //populate Junction table ProjectLink
+            if (!empty($new_link_ids)) {
+                foreach ($new_link_ids as $link_id) {
+                    addProjectLink($project_id, $link_id);
+                }
+            }
+            if (!empty($old_link_ids)) {
+                foreach ($old_link_ids as $link_id) {
+                    addProjectLink($project_id, $link_id);
+                }
+            }
 
         }
         $projects = getProjects();
