@@ -40,6 +40,7 @@
         </ul>
     </div>
 </nav>
+<!-- Main content -->
 <?php if ($message != null): ?>
     
         <div class="message">
@@ -50,42 +51,92 @@
         <p class="text-center">You will be redirected automatically.</p>
     
     <?php else: ?>
-        <div class="card projectsummary">
-            <div class="card-block project">
-                <h1 class="card-title w-50 text-capitalize" id="title"><?= ($project['title']) ?></h1>
-                <h6 class="card-subtitle mb-2 text-muted text-capitalize edit" contenteditable="false" id="status"><?= ($project['status']) ?></h6>
-                <p class="card-text edit" contenteditable="false" id="description"><?= ($project['description']) ?></p>
-                <span>Trello: </span><a href="http://www.trello/<?= ($project['trello']) ?>" class="card-link edit" contenteditable="false" id="trello"><?= ($project['trello']) ?></a>
-                <a href="#" class="card-link edit" contenteditable="false">Another link</a>
-                <hr>
-                <form method="POST" action="./<?= ($project['title']) ?>">
+        <div class="container project-display">
+            <br>
+            <h1 class="w-50 text-capitalize" id="title"><?= ($project['title']) ?></h1>
+            <h6 class="mb-2 text-muted text-capitalize edit" contenteditable="false" id="status"><?= ($project['status']) ?></h6>
+            <p class="edit text-capitalize" contenteditable="false" id="description"><?= ($project['description']) ?></p>
+            <div class="row">
+                <div class="col-sm">
+                    <!-- Display Links -->
+                    <h6>Links:</h6>
+                    <hr>
+                    <p>Site URL:</p>
+                    <?php foreach (($links?:[]) as $link): ?>
+                        <?php if ($link['type']=='siteurl'): ?>
+                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <br>
+                    <p>Trello:</p>
+                    <?php foreach (($links?:[]) as $link): ?>
+                        <?php if ($link['type']=='trello'): ?>
+                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <br>
+                    <p>GitHub:</p>
+                    <?php foreach (($links?:[]) as $link): ?>
+                        <?php if ($link['type']=='github'): ?>
+                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <div class="col-sm">
+                    <h6>Client Info:</h6>
+                    <hr>
+                    <p id="client" class="edit"><?= ($project['client']) ?></p>
+                    <p class="edit"><?= ($project['location']) ?></p>
+                    <p class="edit"><?= ($project['contactname']) ?></p>
+                    <p class="edit"><?= ($project['contactemail']) ?></p>
+                    <p class="edit"><?= ($project['contactphone']) ?></p>
+                    <p class="edit"><?= ($project['companyurl']) ?></p>
+                </div>
+                <div class="col-sm">
+                    <h6>Project History:</h6>
+                    <hr>
+                    <?php foreach (($notes?:[]) as $note): ?>
+                            <p><?= ($note['note']) ?></p>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <form method="POST" action="./<?= ($project['title']) ?>">
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="deleteProjectLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteProjectLabel">Confirm</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete <?= ($project['title']) ?>?
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" id="delete" name="delete"
+                                   class="btn btn-success btn-sm float-left"
+                                   value="Delete Project"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+            <hr>
+            <div class="row">
+                <div class="col align-self-start">
                     <button type="button" class="btn btn-success btn-sm float-left" data-toggle="modal" data-target="#deleteProject">
                         Delete Project
                     </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="deleteProjectLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteProjectLabel">Confirm</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to delete <?= ($project['title']) ?>?
-                                </div>
-                                <div class="modal-footer">
-                                    <input type="submit" id="delete" name="delete"
-                                           class="btn btn-success btn-sm float-left"
-                                           value="Delete Project"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <input type="button" id="editButton" class="btn btn-success btn-sm float-right" value="Edit"/>
+                </div>
+                <div class="col align-self-end">
+                    <input type="button" id="editButton" class="btn btn-success btn-sm float-right" value="Edit"/>
+                </div>
+                <br>
             </div>
+            <br>
         </div>
     
 <?php endif; ?>

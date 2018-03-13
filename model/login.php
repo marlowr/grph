@@ -10,9 +10,11 @@ require_once('/home/rmarlowg/config.php');
 require_once ('model/db.php');
 
 function login($username, $password) {
+    echo $username;
+    echo $password;
     global $dbh;
 
-    $sql = "SELECT id, username, password FROM members WHERE username = :username";
+    $sql = "SELECT member_id, username, password FROM members WHERE username = :username";
     //2. Prepare the statement
     $statement = $dbh->prepare($sql);
     //3. Bind parameters

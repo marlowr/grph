@@ -10,18 +10,14 @@
 
     $dbh = connect();
 
-    print_r($_POST);
     $title = $_POST['title'];
     $description = $_POST['description'];
     $client = $_POST['client'];
-    $siteurl = $_POST['siteurl'];
-    $trello = $_POST['trello'];
-    $github = $_POST['github'];
     $login = $_POST['login'];
     $password = $_POST['password'];
     $status = $_POST['status'];
     $notes = $_POST['notes'];
+    $oldtitle = $_POST['notes'];
 
     //Insert the project into the DB
-    updateProject($title, $description, $client, $siteurl, $trello,
-        $github, $login, $password, $status, $notes);
+    updateProject($title, $description, $client, $login, $password, $status,$oldtitle);

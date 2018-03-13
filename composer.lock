@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6dcf1427d2a1fe3ff1400974babb92df",
+    "hash": "be7498ef3b2ceb5d68e81629307722a2",
     "content-hash": "66809b32c917c2df167f3d8e27586354",
     "packages": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bcosca/fatfree-core.git",
-                "reference": "10f97fb756b42d82ccdc02ad8054a1af8b589c83"
+                "reference": "8bf3b4c580a4cf24307b095fb8515fc22ba40c56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/10f97fb756b42d82ccdc02ad8054a1af8b589c83",
-                "reference": "10f97fb756b42d82ccdc02ad8054a1af8b589c83",
+                "url": "https://api.github.com/repos/bcosca/fatfree-core/zipball/8bf3b4c580a4cf24307b095fb8515fc22ba40c56",
+                "reference": "8bf3b4c580a4cf24307b095fb8515fc22ba40c56",
                 "shasum": ""
             },
             "require": {
@@ -36,7 +36,7 @@
             ],
             "description": "A powerful yet easy-to-use PHP micro-framework designed to help you build dynamic and robust Web applications - fast!",
             "homepage": "http://fatfreeframework.com/",
-            "time": "2018-01-12 18:47:02"
+            "time": "2018-03-13 10:08:03"
         }
     ],
     "packages-dev": [],
