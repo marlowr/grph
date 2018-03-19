@@ -140,6 +140,26 @@
         $statement->execute();
     }
 
+    function getProjectLinkId($title) {
+        global $dbh;
+
+        $sql = "SELECT project_id FROM projects WHERE title = :title";
+
+        //2. Prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        //3. Bind parameters
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+
+        //4. Execute the query
+        $statement->execute();
+
+        $project = $statement->fetch();
+
+        return $project['project_id'];
+
+    }
+
     function getLinks($project_id) {
         global $dbh;
 
@@ -199,6 +219,40 @@
         $notes = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $notes;
+
+
+    }
+
+    function updateNote($note_id, $note) {
+        global $dbh;
+        //Define query
+        $sql = "UPDATE notes SET note=:note WHERE note_id=:note_id";
+        //prepare the statement
+        $statement = $dbh->prepare($sql);
+        $statement->bindParam(':note', $note, PDO::PARAM_STR);
+        $statement->bindParam(':note_id', $note_id, PDO::PARAM_INT);
+
+        //Execute
+        $statement->execute();
+    }
+
+    function getNoteId($note) {
+        global $dbh;
+
+        $sql = "SELECT note_id FROM notes WHERE note = :note";
+
+        //2. Prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        //3. Bind parameters
+        $statement->bindParam(':note', $note, PDO::PARAM_STR);
+
+        //4. Execute the query
+        $statement->execute();
+
+        $note = $statement->fetch();
+
+        return $note['note_id'];
     }
 
     function addLink($type, $url, $project_id) {
@@ -218,6 +272,38 @@
         $statement->execute();
         $id = $dbh->lastInsertId();
         return $id;
+    }
+
+    function getLinkId($url) {
+        global $dbh;
+
+        $sql = "SELECT link_id FROM links WHERE url = :url";
+
+        //2. Prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        //3. Bind parameters
+        $statement->bindParam(':url', $url, PDO::PARAM_STR);
+
+        //4. Execute the query
+        $statement->execute();
+
+        $link = $statement->fetch();
+
+        return $link['link_id'];
+    }
+
+    function updateLink($link_id, $url) {
+        global $dbh;
+        //Define query
+        $sql = "UPDATE links SET url=:url WHERE link_id=:link_id";
+        //prepare the statement
+        $statement = $dbh->prepare($sql);
+        $statement->bindParam(':url', $url, PDO::PARAM_STR);
+        $statement->bindParam(':link_id', $link_id, PDO::PARAM_INT);
+
+        //Execute
+        $statement->execute();
     }
 
 

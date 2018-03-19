@@ -64,7 +64,10 @@
                     <p>Site URL:</p>
                     <?php foreach (($links?:[]) as $link): ?>
                         <?php if ($link['type']=='siteurl'): ?>
-                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                            <?php if ($link['url']): ?>
+                                <a class="edit siteurl" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                            <?php endif; ?>
+
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <div id="add-link"></div>
@@ -73,7 +76,9 @@
                     <p>Trello:</p>
                     <?php foreach (($links?:[]) as $link): ?>
                         <?php if ($link['type']=='trello'): ?>
-                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                            <?php if ($link['url']): ?>
+                                <a class="edit trello" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <div id="add-trello"></div>
@@ -82,7 +87,9 @@
                     <p>GitHub:</p>
                     <?php foreach (($links?:[]) as $link): ?>
                         <?php if ($link['type']=='github'): ?>
-                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                            <?php if ($link['url']): ?>
+                                <a class="edit github" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
+                            <?php endif; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <div id="add-github"></div>
@@ -116,8 +123,10 @@
                     </p>
 
                     <?php foreach (($notes?:[]) as $note): ?>
+                        <?php if ($note['note']): ?>
                             <hr>
-                            <p><?= ($note['note']) ?></p>
+                            <p class="note edit"><?= ($note['note']) ?></p>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                     <div id="add-note"></div>
                     <button type="button" class="btn btn-success btn-sm" id="add-note-button">Add Note</button>

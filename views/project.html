@@ -63,7 +63,10 @@
                     <p>Site URL:</p>
                     <repeat group="{{ @links }}" value="{{ @link }}">
                         <check if="{{ @link['type']=='siteurl' }}">
-                            <a class="edit" href="{{ @link['url'] }}">{{ @link['url'] }}</a><br>
+                            <check if="{{ @link['url'] }}">
+                                <a class="edit siteurl" href="{{ @link['url'] }}">{{ @link['url'] }}</a><br>
+                            </check>
+
                         </check>
                     </repeat>
                     <div id="add-link"></div>
@@ -72,7 +75,9 @@
                     <p>Trello:</p>
                     <repeat group="{{ @links }}" value="{{ @link }}">
                         <check if="{{ @link['type']=='trello' }}">
-                            <a class="edit" href="{{ @link['url'] }}">{{ @link['url'] }}</a><br>
+                            <check if="{{ @link['url'] }}">
+                                <a class="edit trello" href="{{ @link['url'] }}">{{ @link['url'] }}</a><br>
+                            </check>
                         </check>
                     </repeat>
                     <div id="add-trello"></div>
@@ -81,7 +86,9 @@
                     <p>GitHub:</p>
                     <repeat group="{{ @links }}" value="{{ @link }}">
                         <check if="{{ @link['type']=='github' }}">
-                            <a class="edit" href="{{ @link['url'] }}">{{ @link['url'] }}</a><br>
+                            <check if="{{ @link['url'] }}">
+                                <a class="edit github" href="{{ @link['url'] }}">{{ @link['url'] }}</a><br>
+                            </check>
                         </check>
                     </repeat>
                     <div id="add-github"></div>
@@ -115,8 +122,10 @@
                     </p>
 
                     <repeat group="{{ @notes }}" value="{{ @note }}">
+                        <check if="{{ @note['note'] }}">
                             <hr>
-                            <p>{{ @note['note'] }}</p>
+                            <p class="note edit">{{ @note['note'] }}</p>
+                        </check>
                     </repeat>
                     <div id="add-note"></div>
                     <button type="button" class="btn btn-success btn-sm" id="add-note-button">Add Note</button>

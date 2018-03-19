@@ -6,16 +6,33 @@ $(document).ready(function() {
     $(".add-link-button").hide();
     $("#add-note-button").hide();
 
+    var oldSiteurl;
+    var oldTrello;
+    var oldGithub;
+    var oldNotes;
+
+
     $("#editButton").click(function () {
         var editElem = document.getElementsByClassName("edit");
 
         if($("#editButton").val() == "Edit") {
 
+            oldSiteurl = $(".siteurl").map(function() {
+                return $(this).text();
+            }).get();
+            oldTrello = $(".trello").map(function() {
+                return $(this).text();
+            }).get();
+            oldGithub = $(".github").map(function() {
+                return $(this).text();
+            }).get();
+            oldNotes = $(".note").map(function() {
+                return $(this).text();
+            }).get();
+
             //shows all add-link and add-note buttons
             $(".add-link-button").show();
             $("#add-note-button").show();
-
-
 
             $.each(editElem, function () {
                 var id = $(this).attr("id");
@@ -202,6 +219,33 @@ $(document).ready(function() {
             $("#editButton").attr("value","Save");
         } else if($("#editButton").val() == "Save") {
             var title = $('#title').text();
+            var newSiteurl = $("input[name='siteurl[]']").map(function() {
+                return $(this).val();
+            }).get();
+            var updatedSiteurl = $(".siteurl").map(function() {
+                return $(this).text();
+            }).get();
+            var newTrello = $("input[name='trello[]']").map(function() {
+                return $(this).val();
+            }).get();
+            var updatedTrello = $(".trello").map(function() {
+                return $(this).text();
+            }).get();
+            var newGithub = $("input[name='github[]']").map(function() {
+                return $(this).val();
+            }).get();
+            var updatedGithub = $(".github").map(function() {
+                return $(this).text();
+            }).get();
+
+            var newNotes = $("textarea[name='notes[]']").map(function() {
+                return $(this).val();
+            }).get();
+            var updatedNotes = $(".note").map(function() {
+                return $(this).text();
+            }).get();
+
+
             var status = $('#status label.active input').val()
             var description = $("input[name=description]").val();
             if (description == null) {
@@ -316,7 +360,19 @@ $(document).ready(function() {
                     year: year,
                     login: login,
                     password: password,
-                    status: status
+                    status: status,
+                    newSiteurl: newSiteurl,
+                    oldSiteurl: oldSiteurl,
+                    updatedSiteurl: updatedSiteurl,
+                    newTrello: newTrello,
+                    oldTrello: oldTrello,
+                    updatedTrello: updatedTrello,
+                    newGithub: newGithub,
+                    oldGithub: oldGithub,
+                    updatedGithub: updatedGithub,
+                    newNotes: newNotes,
+                    oldNotes: oldNotes,
+                    updatedNotes: updatedNotes
                 },
                 success: function () {
                     window.location.reload();
