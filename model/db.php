@@ -109,27 +109,35 @@
         $statement->execute();
     }
 
-    function updateProject($title, $description, $client, $login, $password, $status) {
+    function updateProject($title, $description, $client, $contactname, $location, $contactemail, $contactphone,
+                           $companyurl, $login, $password, $status, $class, $instructor, $quarter, $year) {
         global $dbh;
-
         //Define query
         $sql = "UPDATE projects
-                SET title=:title,description=:description,client=:client,
-                login=:login,password=:password,status=:status WHERE title=:title";
-
+                    SET title=:title,description=:description,client=:client, login=:login,password=:password,
+                    status=:status, location=:location, contactname=:contactname, contactemail=:contactemail,
+                    contactphone=:contactphone, companyurl=:companyurl, class=:class, instructor=:instructor,
+                    quarter=:quarter, years=:years WHERE title=:title";
         //prepare the statement
         $statement = $dbh->prepare($sql);
-
-        $statement->bindParam(':title',$title, PDO::PARAM_STR);
-        $statement->bindParam(':description',$description, PDO::PARAM_STR);
-        $statement->bindParam(':client',$client, PDO::PARAM_STR);
-        $statement->bindParam(':login',$login, PDO::PARAM_STR);
-        $statement->bindParam(':password',$password, PDO::PARAM_STR);
-        $statement->bindParam(':status',$status,PDO::PARAM_STR);
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam(':description', $description, PDO::PARAM_STR);
+        $statement->bindParam(':client', $client, PDO::PARAM_STR);
+        $statement->bindParam(':login', $login, PDO::PARAM_STR);
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
+        $statement->bindParam(':status', $status, PDO::PARAM_STR);
+        $statement->bindParam(':location', $location, PDO::PARAM_STR);
+        $statement->bindParam(':companyurl', $companyurl, PDO::PARAM_STR);
+        $statement->bindParam(':contactname', $contactname, PDO::PARAM_STR);
+        $statement->bindParam(':contactemail', $contactemail, PDO::PARAM_STR);
+        $statement->bindParam(':contactphone', $contactphone, PDO::PARAM_STR);
+        $statement->bindParam(':instructor', $instructor, PDO::PARAM_STR);
+        $statement->bindParam(':class', $class, PDO::PARAM_STR);
+        $statement->bindParam(':quarter', $quarter, PDO::PARAM_STR);
+        $statement->bindParam(':years', $year, PDO::PARAM_STR);
 
         //Execute
         $statement->execute();
-
     }
 
     function getLinks($project_id) {

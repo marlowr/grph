@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 ini_set('display_errors',TRUE);
 session_start();
 require_once ('vendor/autoload.php');
-require_once('/home/rmarlowg/config.php');
+require_once('/home/cphamgre/config.php');
 require_once ('model/db.php');
 require_once ('model/login.php');
 require_once ('model/validation.php');
@@ -147,6 +147,25 @@ $f3->route('POST|GET /@title', function($f3, $params) {
         $f3->reroute("./");
     }
 });
+
+$f3->route('POST|GET /edit', function($f3, $params) {
+    if($_SESSION['logged']) {
+        print_r($_POST);
+        $title = $params['title'];
+        //If the project has just been deleted, show message.
+        if($_POST['delete'] == 'Delete Project') {
+            removeProject($title);
+            $f3->set('message','Project Deleted');
+        }
+        $project = getProject($title);
+        $f3->set('project', $project);
+        echo Template::instance()->render('views/project.html');
+    } else {
+        $f3->reroute("./");
+    }
+});
+
+
 
 //Run fat free
 $f3->run();
