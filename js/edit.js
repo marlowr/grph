@@ -2,14 +2,38 @@
 
 $(document).ready(function() {
 
-    //hides all content buttons
+    //hides all content add buttons
     $(".add-link-button").hide();
     $("#add-note-button").hide();
+    $("#add-description-button").hide();
+    $("#add-username-button").hide();
+    $("#add-password-button").hide();
+    $("#add-client-button").hide();
+    $("#add-location-button").hide();
+    $("#add-contactname-button").hide();
+    $("#add-contactemail-button").hide();
+    $("#add-contactphone-button").hide();
+    $("#add-companyurl-button").hide();
+    $("#add-class-button").hide();
+    $("#add-instructor-button").hide();
+    $("#add-quarter-button").hide();
+    $("#add-year-button").hide();
+    $("#status-bar").hide();
 
-    var oldSiteurl;
-    var oldTrello;
-    var oldGithub;
-    var oldNotes;
+    //hides all content input text box
+    $("#description-input").hide();
+    $("#username-input").hide();
+    $("#password-input").hide();
+    $("#client-input").hide();
+    $("#location-input").hide();
+    $("#contactname-input").hide();
+    $("#contactemail-input").hide();
+    $("#contactphone-input").hide();
+    $("#companyurl-input").hide();
+    $("#class-input").hide();
+    $("#instructor-input").hide();
+    $("#quarter-input").hide();
+    $("#year-input").hide();
 
 
     $("#editButton").click(function () {
@@ -17,107 +41,52 @@ $(document).ready(function() {
 
         if($("#editButton").val() == "Edit") {
 
-            oldSiteurl = $(".siteurl").map(function() {
-                return $(this).text();
-            }).get();
-            oldTrello = $(".trello").map(function() {
-                return $(this).text();
-            }).get();
-            oldGithub = $(".github").map(function() {
-                return $(this).text();
-            }).get();
-            oldNotes = $(".note").map(function() {
-                return $(this).text();
-            }).get();
-
-            //shows all add-link and add-note buttons
+            //shows all add-link and add-note buttons as well as status button group
             $(".add-link-button").show();
             $("#add-note-button").show();
+            $("#status-bar").show();
+
+            //hide status value
+            $("#status").hide();
 
             $.each(editElem, function () {
                 var id = $(this).attr("id");
 
-                if($(this).html() != "") {
+                if(!$(this).is(':empty')) {
                     $(this).prop('contenteditable', true);
-                } else if($(this).html() === "") {
-                    var addedButton = $("<button type=\"button\" class=\"btn btn-outline-success btn-sm\">Add " + id + "</button>");
 
-                    $(this).html(addedButton);
-                    addedButton.attr("id", "add-" + id + "-button" );
+
+                } else if($(this).is(':empty')) {
+
+                    //shows all content add buttons
+                    $("#add-" + id + "-button").show();
+
                     $(this).prop('contenteditable', false);
                 }
 
             });
 
+            //make status value checked and active in button group
             var selectedStatus = $("#status").html();
             selectedStatus = selectedStatus.trim();
             selectedStatus = selectedStatus.toLowerCase();
 
-            //add edit-status radio buttons according to status value
-            if(selectedStatus == "active")
-            {
-                $("#status").html("<div class=\"btn-group btn-group-toggle\" id=\"status\" data-toggle=\"buttons\">\n" +
-                    "  <label class=\"btn btn-outline-success active\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"active\" autocomplete=\"off\" checked=\"\"> Active\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"pending\" autocomplete=\"off\"> Pending\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"maintenance\" autocomplete=\"off\"> Maintenance\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"retired\" autocomplete=\"off\"> Retired\n" +
-                    "  </label>\n" +
-                    "</div>");
+            if(selectedStatus == "active") {
+
+                $("label#active").addClass("active");
+
             } else if(selectedStatus == "pending") {
-                $("#status").html("<div class=\"btn-group btn-group-toggle\" id=\"status\" data-toggle=\"buttons\">\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"active\" autocomplete=\"off\"> Active\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success active\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"pending\" autocomplete=\"off\" checked=\"\"> Pending\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"maintenance\" autocomplete=\"off\"> Maintenance\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"retired\" autocomplete=\"off\"> Retired\n" +
-                    "  </label>\n" +
-                    "</div>");
+                $("label#pending").addClass("active");
+
             } else if(selectedStatus == "maintenance") {
-                $("#status").html("<div class=\"btn-group btn-group-toggle\" id=\"status\" data-toggle=\"buttons\">\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"active\" autocomplete=\"off\"> Active\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"pending\" autocomplete=\"off\"> Pending\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success active\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"maintenance\" autocomplete=\"off\" checked=\"\"> Maintenance\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"retired\" autocomplete=\"off\"> Retired\n" +
-                    "  </label>\n" +
-                    "</div>");
+                $("label#maintenance").addClass("active");
+
             } else if(selectedStatus == "retired") {
-                $("#status").html("<div class=\"btn-group btn-group-toggle\" id=\"status\" data-toggle=\"buttons\">\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"active\" autocomplete=\"off\"> Active\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"pending\" autocomplete=\"off\"> Pending\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"maintenance\" autocomplete=\"off\"> Maintenance\n" +
-                    "  </label>\n" +
-                    "  <label class=\"btn btn-outline-success active\">\n" +
-                    "    <input type=\"radio\" name=\"status\" value=\"retired\" autocomplete=\"off\" checked=\"\"> Retired\n" +
-                    "  </label>\n" +
-                    "</div>");
+                $("label#retired").addClass("active");
+
             }
 
-            //if add buttons are clicked
+            //dynamically adds multiple links
             $(".add-link-button").click(function() {
                 var id = $(this).attr("id");
 
@@ -152,68 +121,79 @@ $(document).ready(function() {
 
             });
 
-            //add input boxes for every clicked input button
+            //dynamically adds multiple notes
             $("#add-note-button").click(function() {
                 $("#add-note").append("<textarea class=\"form-control\" id=\"notes\"\n" +
-                    "                                  name=\"notes[]\" rows=\"5\" placeholder=\"\"></textarea><br />");
+                            "name=\"notes[]\" rows=\"5\" placeholder=\"\"></textarea><br />");
             });
+
 
             $("#add-description-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"description\"\n" +
-                                            "name=\"description\" placeholder=\"Description\">");
-            });
+                $(this).hide();
 
+                $("#description-input").show();
+            });
             $("#add-username-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"username\"\n" +
-                    "name=\"username\" placeholder=\"Username\">");
-            });
+                $(this).hide();
 
+                $("#username-input").show();
+            });
             $("#add-password-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"password\"\n" +
-                    "name=\"password\" placeholder=\"Password\">");
-            });
+                $(this).hide();
 
+                $("#password-input").show();
+            });
             $("#add-client-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"client\"\n" +
-                    "name=\"client\" placeholder=\"Client/Company Name\">");
+                $(this).hide();
+
+                $("#client-input").show();
             });
             $("#add-location-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"location\"\n" +
-                    "name=\"location\" placeholder=\"Location\">");
+                $(this).hide();
+
+                $("#location-input").show();
             });
             $("#add-contactname-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"contactname\"\n" +
-                    "name=\"contactname\" placeholder=\"Contact Name\">");
+                $(this).hide();
+
+                $("#contactname-input").show();
             });
             $("#add-contactemail-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"contactemail\"\n" +
-                    "name=\"contactemail\" placeholder=\"Contact Email\">");
+                $(this).hide();
+
+                $("#contactemail-input").show();
             });
             $("#add-contactphone-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"contactphone\"\n" +
-                    "name=\"contactphone\" placeholder=\"Contact Phone\">");
+                $(this).hide();
+
+                $("#contactphone-input").show();
             });
             $("#add-companyurl-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"companyurl\"\n" +
-                    "name=\"companyurl\" placeholder=\"Company URL\">");
+                $(this).hide();
+
+                $("#companyurl-input").show();
             });
             $("#add-class-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"class\"\n" +
-                    "name=\"class\" placeholder=\"IT Class\">");
+                $(this).hide();
+
+                $("#class-input").show();
             });
             $("#add-instructor-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"instructor\"\n" +
-                    "name=\"instructor\" placeholder=\"Instructor Name\">");
+                $(this).hide();
+
+                $("#instructor-input").show();
             });
             $("#add-quarter-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"quarter\"\n" +
-                    "name=\"quarter\" placeholder=\"Quarter\">");
+                $(this).hide();
+
+                $("#quarter-input").show();
+
             });
             $("#add-year-button").click(function() {
-                $(this).parent().html("<input type=\"text\" class=\"form-control\" id=\"year\"\n" +
-                    "name=\"year\" placeholder=\"Year\">");
-            });
+                $(this).hide();
 
+                $("#year-input").show();
+            });
 
 
             $("#editButton").attr("value","Save");
@@ -246,101 +226,64 @@ $(document).ready(function() {
             }).get();
 
 
-            var status = $('#status label.active input').val()
+            var status = $('#status-bar label.active input').val();
+
             var description = $("input[name=description]").val();
-            if (description == null) {
-                description = $('#description').text();
-                if(description === "Add description") {
-                    description = "";
-                }
+            if (description === "") {
+                description = $("#description").text();
             }
+
             var client = $("input[name=client]").val();
-            if (client == null) {
+            if (client === "") {
                 client = $('#client').text();
-                if(client === "Add client") {
-                    client = "";
-                }
+
             }
             var location = $("input[name=location]").val();
-            if (location == null) {
+            if (location === "") {
                 location = $('#location').text();
-                if(location === "Add location") {
-                    location = "";
-                }
             }
             var contactname = $("input[name=contactname]").val();
-            if (contactname == null) {
+            if (contactname === "") {
                 contactname = $('#contactname').text();
-                if(contactname === "Add contactname") {
-                    contactname = "";
-                }
             }
 
             var contactphone = $("input[name=contactphone]").val();
-            if (contactphone == null) {
+            if (contactphone === "") {
                contactphone = $('#contactphone').text();
-                if(contactphone === "Add contactphone") {
-                    contactphone = "";
-                }
             }
             var contactemail = $("input[name=contactemail]").val();
-            if (contactemail == null) {
+            if (contactemail === "") {
                 contactemail = $('#contactemail').text();
-                if(contactemail === "Add contactemail") {
-                    contactemail = "";
-                }
             }
             var companyurl = $("input[name=companyurl]").val();
-            if (companyurl == null) {
+            if (companyurl === "") {
                 companyurl = $('#companyurl').text();
-                if(companyurl === "Add companyurl") {
-                    companyurl = "";
-                }
             }
             var classs = $("input[name=class]").val();
-            if (classs == null) {
+            if (classs === "") {
                 classs = $('#class').text();
-                if(classs === "Add class") {
-                    classs = "";
-                }
             }
             var instructor = $("input[name=instructor]").val();
-            if (instructor == null) {
+            if (instructor === "") {
                 instructor = $('#instructor').text();
-                if(instructor === "Add instructor") {
-                    instructor = "";
-                }
             }
             var quarter = $("input[name=quarter]").val();
-            if (quarter == null) {
+            if (quarter === "") {
                 quarter = $('#quarter').text();
-                if(quarter === "Add quarter") {
-                    quarter = "";
-                }
             }
             var year = $("input[name=year]").val();
-            if (year == null) {
+            if (year === "") {
                 year = $('#year').text();
-                if(year === "Add year") {
-                    year = "";
-                }
             }
 
             var login = $("input[name=username]").val();
-            if (login == null) {
+            if (login === "") {
                 login = $('#username').text();
-                if(login === "Add username") {
-                    login = "";
-                }
             }
             var password = $("input[name=password]").val();
-            if (password == null) {
+            if (password === "") {
                 password = $('#password').text();
-                if(password === "Add password") {
-                    password = "";
-                }
             }
-
 
 
             $.ajax({
@@ -362,16 +305,16 @@ $(document).ready(function() {
                     password: password,
                     status: status,
                     newSiteurl: newSiteurl,
-                    oldSiteurl: oldSiteurl,
+                    //oldSiteurl: oldSiteurl,
                     updatedSiteurl: updatedSiteurl,
                     newTrello: newTrello,
-                    oldTrello: oldTrello,
+                    //oldTrello: oldTrello,
                     updatedTrello: updatedTrello,
                     newGithub: newGithub,
-                    oldGithub: oldGithub,
+                    //oldGithub: oldGithub,
                     updatedGithub: updatedGithub,
                     newNotes: newNotes,
-                    oldNotes: oldNotes,
+                    //oldNotes: oldNotes,
                     updatedNotes: updatedNotes
                 },
                 success: function () {
@@ -380,9 +323,9 @@ $(document).ready(function() {
             });
 
             $.each(editElem, function () {
-                $(this).prop('contenteditable', false)
+                $(this).prop('contenteditable', false);
             });
             $("#editButton").attr("value","Edit");
         }
-    })
+    });
 });
