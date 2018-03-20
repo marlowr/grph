@@ -1,15 +1,45 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mrrya
- * Date: 3/16/2018
- * Time: 12:16 PM
+ * Class EditProject
+ *
+ * EditProject represents an edited project in the Green River Project Hub
+ *
+ * The EditProject class represents an edited project with the same fields as a Project.  It
+ * has a title, description, client, login, password, project status, company location,
+ * contact name, contact phone, contact email, IT Class, class quarter, class year.  It
+ * extends from Project where it also contains links and notes.  This class contains getter
+ * functions
+ *
+ * @author Ryan Marlow <rmarlow@mail.greenriver.edu>
+ * @author Cynthia Pham <cpham15@mail.greenriver.edu
+ * @copyright 2018
  */
-
 class EditProject extends Project {
     protected $links;
     protected $savedNotes = array();
 
+    /**
+     * EditProject constructor that takes title, description, client, login, password,
+     * project status, company location, contact name, contact phone, contact email,
+     * IT Class, class quarter, class year, and project id.  Uses parent Project constructor
+     * to construct object.
+     * @param $title Title
+     * @param $description Project description
+     * @param $client Client name
+     * @param $login Login username
+     * @param $password Password
+     * @param $status Project status
+     * @param $location Client location
+     * @param $companyurl Company URL
+     * @param $contactname Contact Name
+     * @param $contactemail Contact Email
+     * @param $contactphone Contact Phone
+     * @param $instructor Instructor name
+     * @param $class Class name
+     * @param $quarter Class quarter
+     * @param $year Class year
+     * @param $project_id Project ID
+     */
     public function __construct($title, $description, $client, $login, $password, $status, $location, $companyurl, $contactname, $contactemail,
                                 $contactphone, $instructor, $class, $quarter, $year,$project_id)
     {
@@ -18,6 +48,11 @@ class EditProject extends Project {
         $this->project_id = $project_id;
     }
 
+    /**
+     * Selects note content from notes database table where note's project id belongs
+     * to a specific project
+     *
+     */
     function getNotes() {
         global $dbh;
 
@@ -41,6 +76,11 @@ class EditProject extends Project {
         }
     }
 
+    /**
+     * Selects links from links database table where link's project id belongs
+     * to a specific project
+     *
+     */
     function getLinks() {
         global $dbh;
 
@@ -70,15 +110,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
-     */
-    public function getProjectId()
-    {
-        return $this->project_id;
-    }
-
-    /**
-     * @return mixed
+     * Returns project title
+     * @return $title Project title
      */
     public function getTitle()
     {
@@ -86,7 +119,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns project description
+     * @return $description Project description
      */
     public function getDescription()
     {
@@ -94,7 +128,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns project client
+     * @return $client Project client
      */
     public function getClient()
     {
@@ -102,7 +137,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns login username
+     * @return $login Login username
      */
     public function getLogin()
     {
@@ -110,7 +146,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Retruns login password
+     * @return $password Password
      */
     public function getPassword()
     {
@@ -118,7 +155,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns project status
+     * @return $status Project status
      */
     public function getStatus()
     {
@@ -126,7 +164,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns client location
+     * @return $location Client location
      */
     public function getLocation()
     {
@@ -134,7 +173,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns company URL
+     * @return $companyurl Company URL
      */
     public function getCompanyurl()
     {
@@ -142,7 +182,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns contact name
+     * @return $contactname Contact name
      */
     public function getContactname()
     {
@@ -150,7 +191,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns contact email
+     * @return $contactemail Contact email
      */
     public function getContactemail()
     {
@@ -158,7 +200,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns contact phone
+     * @return $contactphone Contact phone
      */
     public function getContactphone()
     {
@@ -166,7 +209,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns instructor name
+     * @return $instructor Instructor name
      */
     public function getInstructor()
     {
@@ -174,7 +218,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns class name
+     * @return $class Class name
      */
     public function getClass()
     {
@@ -182,7 +227,8 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns class quarter
+     * @return $quarter Class quarter
      */
     public function getQuarter()
     {
@@ -190,30 +236,43 @@ class EditProject extends Project {
     }
 
     /**
-     * @return mixed
+     * Returns class year
+     * @return $year Class year
      */
     public function getYear()
     {
         return $this->year;
     }
 
+    /**
+     * Returns an array of site URLs
+     * @return array $siteurl Array of site URLs
+     */
     public function getSiteURL() {
         return $this->siteurl;
     }
 
+    /**
+     * Returns an array of Trello URLs
+     * @return array $trello Array of trello URLS
+     */
     public function getTrello() {
         return $this->trello;
     }
 
+    /**
+     * Returns an array of GitHub URLs
+     * @return array $github Array of GitHub URLS
+     */
     public function getGitHub() {
         return $this->github;
     }
 
+    /**
+     * Returns an array of saved notes
+     * @return array $savedNotes Array of notes
+     */
     public function getProjectNotes() {
         return $this->savedNotes;
     }
-
-    /**
-     * @return mixed
-     */
 }

@@ -169,12 +169,13 @@
                         <input type="text" class="form-control" id="year-input" name="year" placeholder="Year">
                         <span><button type="button" class="btn btn-outline-success btn-sm" id="add-year-button">Add Year</button></span>
                     </p>
-
+                    <hr>
+                    <h6>Notes:</h6>
                     <?php foreach (($project->getProjectNotes()?:[]) as $note): ?>
                         <div class="notediv">
+                            <hr class="w-50">
                             <p class="note noteclass"><?= ($note) ?></p>
                             <button type="button" class="btn btn-sm delete-note-button float-left">Delete</button>
-                            <br>
                         </div>
                     <?php endforeach; ?>
                     <div id="add-note"></div>

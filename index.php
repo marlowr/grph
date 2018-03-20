@@ -1,11 +1,18 @@
 <?php
-/** Ryan Marlow / Cynthia Pham
-   IT 328 Final Project - Green River Project Hub
-   index.php
-*/
+/**
+ * index.php defines the routing for grph project
+ *
+ * Uses fat-free framework to define url routing for grph project.  In each URL
+ * routing, POST values are received to create/set Project and EditedProject objects.
+ *
+ * @author Ryan Marlow <rmarlow@mail.greenriver.edu>
+ * @author Cynthia Pham <cpham15@mail.greenriver.edu>
+ * @link http://rmarlow.greenriverdev.com/IT328/grph
+ */
 //Require the autoload file
 //error_reporting(E_ALL);
 //ini_set('display_errors',TRUE);
+
 session_start();
 require_once ('vendor/autoload.php');
 require_once('/home/rmarlowg/config.php');
@@ -21,7 +28,7 @@ $dbh = connect();
 
 $f3->set('logged',false);
 
-//Login page if not already logged in.
+//If /home is recieved, clears message variable and sends to login
 $f3->route('GET|POST /', function($f3) {
     if($_SESSION['logged']) {
         $f3->reroute("./home");

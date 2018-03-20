@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mrrya
- * Date: 3/19/2018
- * Time: 5:30 PM
+ * This file is used by an Ajax call to remove a link from the database, based on unique note provided.
+ *
+ * @authors Ryan Marlow<rmarlow@mail.greenriver.edu>
+ * @version 1.0
+ *
  */
 
 require('/home/rmarlowg/config.php');

@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * This file contains all the database information and logic for the Green River Project Hub
+ * IT 328 Final Project - Green River Project Hub
+ * index.php
+ *
+ * @package classes
+ * @authors Ryan Marlow<rmarlow@mail.greenriver.edu> / Cynthia Pham <cpham15@mail.greenriver.edu>
+ * @version 1.0
+ *
+ */
     function connect()
     {
         try {
@@ -14,44 +23,11 @@
         }
     }
 
-    function addProject($title, $description, $client, $login, $password, $status,
-                        $location, $companyurl, $contactname, $contactemail,
-                        $contactphone, $instructor, $class, $quarter, $years) {
-        global $dbh;
-
-        //Define query
-        $sql = "INSERT INTO projects (title, description, client, login, 
-                password,status, location, companyurl, contactname, contactemail, contactphone, 
-                instructor, class, quarter, years) VALUES (:title,:description,:client,:login,
-                :password,:status, :location, :companyurl, :contactname, :contactemail, 
-                :contactphone, :instructor, :class, :quarter, :years)";
-
-        //prepare the statement
-        $statement = $dbh->prepare($sql);
-
-        $statement->bindParam(':title', $title, PDO::PARAM_STR);
-        $statement->bindParam(':description', $description, PDO::PARAM_STR);
-        $statement->bindParam(':client', $client, PDO::PARAM_STR);
-        $statement->bindParam(':login', $login, PDO::PARAM_STR);
-        $statement->bindParam(':password', $password, PDO::PARAM_STR);
-        $statement->bindParam(':status', $status, PDO::PARAM_STR);
-        $statement->bindParam(':location', $location, PDO::PARAM_STR);
-        $statement->bindParam(':companyurl', $companyurl, PDO::PARAM_STR);
-        $statement->bindParam(':contactname', $contactname, PDO::PARAM_STR);
-        $statement->bindParam(':contactemail', $contactemail, PDO::PARAM_STR);
-        $statement->bindParam(':contactphone', $contactphone, PDO::PARAM_STR);
-        $statement->bindParam(':instructor', $instructor, PDO::PARAM_STR);
-        $statement->bindParam(':class', $class, PDO::PARAM_STR);
-        $statement->bindParam(':quarter', $quarter, PDO::PARAM_STR);
-        $statement->bindParam(':years', $years, PDO::PARAM_STR);
-
-        //Execute
-        $statement->execute();
-        $id = $dbh->lastInsertId();
-        return $id;
-
-    }
-
+/**
+ * Returns the project information from the database based on the title provided.
+ * @param $title
+ * @return mixed project object array
+ */
     function getProject($title) {
 
         global $dbh;
@@ -74,6 +50,9 @@
         return $project;
     }
 
+/**
+ * @return array of all projects in database
+ */
     function getProjects() {
 
         global $dbh;
@@ -93,6 +72,10 @@
 
     }
 
+/**
+ * Removes project from database based on project_id provided.
+ * @param $project_id
+ */
     function removeProject($project_id) {
         global $dbh;
 
@@ -110,6 +93,24 @@
         $statement->execute();
     }
 
+/**
+ * Updates project information in database based on the title.
+ * @param $title
+ * @param $description
+ * @param $client
+ * @param $contactname
+ * @param $location
+ * @param $contactemail
+ * @param $contactphone
+ * @param $companyurl
+ * @param $login
+ * @param $password
+ * @param $status
+ * @param $class
+ * @param $instructor
+ * @param $quarter
+ * @param $year
+ */
     function updateProject($title, $description, $client, $contactname, $location, $contactemail, $contactphone,
                            $companyurl, $login, $password, $status, $class, $instructor, $quarter, $year) {
         global $dbh;
@@ -141,6 +142,11 @@
         $statement->execute();
     }
 
+/**
+ * Returns project id given from the title specified.
+ * @param $title
+ * @return mixed
+ */
     function getProjectLinkId($title) {
         global $dbh;
 
@@ -161,6 +167,10 @@
 
     }
 
+/**
+ * @param $project_id
+ * @return array returns all links based on project_id number
+ */
     function getLinks($project_id) {
         global $dbh;
 
@@ -183,6 +193,12 @@
     }
 
 
+/**
+ * Adds a note to the database, using specified note and project_id number.
+ * @param $note
+ * @param $project_id
+ * @return string
+ */
     function addNote($note,$project_id) {
         global $dbh;
 
@@ -201,6 +217,11 @@
         return $id;
     }
 
+/**
+ * Returns all notes linked to the project_id number provided.
+ * @param $project_id
+ * @return array
+ */
     function getNotes($project_id) {
         global $dbh;
 
@@ -220,42 +241,15 @@
         $notes = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $notes;
-
-
     }
 
-    function updateNote($note_id, $note) {
-        global $dbh;
-        //Define query
-        $sql = "UPDATE notes SET note=:note WHERE note_id=:note_id";
-        //prepare the statement
-        $statement = $dbh->prepare($sql);
-        $statement->bindParam(':note', $note, PDO::PARAM_STR);
-        $statement->bindParam(':note_id', $note_id, PDO::PARAM_INT);
-
-        //Execute
-        $statement->execute();
-    }
-
-    function getNoteId($note) {
-        global $dbh;
-
-        $sql = "SELECT note_id FROM notes WHERE note = :note";
-
-        //2. Prepare the statement
-        $statement = $dbh->prepare($sql);
-
-        //3. Bind parameters
-        $statement->bindParam(':note', $note, PDO::PARAM_STR);
-
-        //4. Execute the query
-        $statement->execute();
-
-        $note = $statement->fetch();
-
-        return $note['note_id'];
-    }
-
+/**
+ * Adds link to database based on project_id number.
+ * @param $type
+ * @param $url
+ * @param $project_id
+ * @return string
+ */
     function addLink($type, $url, $project_id) {
         global $dbh;
 
@@ -274,69 +268,6 @@
         $id = $dbh->lastInsertId();
         return $id;
     }
-
-    function removeLink($url) {
-        global $dbh;
-
-        //Define query
-        $sql = "DELETE FROM `links` WHERE url=:url;";
-
-        //prepare the statement
-        $statement = $dbh->prepare($sql);
-
-        $statement->bindParam(':url',$url, PDO::PARAM_STR);
-
-        //Execute
-        $statement->execute();
-    }
-
-function removeNote($note) {
-    global $dbh;
-
-    //Define query
-    $sql = "DELETE FROM `notes` WHERE note=:note;";
-
-    //prepare the statement
-    $statement = $dbh->prepare($sql);
-
-    $statement->bindParam(':note',$note, PDO::PARAM_STR);
-
-    //Execute
-    $statement->execute();
-}
-
-    function getLinkId($url) {
-        global $dbh;
-
-        $sql = "SELECT link_id FROM links WHERE url = :url";
-
-        //2. Prepare the statement
-        $statement = $dbh->prepare($sql);
-
-        //3. Bind parameters
-        $statement->bindParam(':url', $url, PDO::PARAM_STR);
-
-        //4. Execute the query
-        $statement->execute();
-
-        $link = $statement->fetch();
-
-        return $link['link_id'];
-    }
-
-    function updateLink($link_id, $url) {
-        global $dbh;
-        //Define query
-        $sql = "UPDATE links SET url=:url WHERE link_id=:link_id";
-        //prepare the statement
-        $statement = $dbh->prepare($sql);
-        $statement->bindParam(':url', $url, PDO::PARAM_STR);
-        $statement->bindParam(':link_id', $link_id, PDO::PARAM_INT);
-
-        //Execute
-        $statement->execute();
-    }
-
 
 
 

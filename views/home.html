@@ -1,3 +1,12 @@
+<!-- Ryan Marlow
+     Cynthia Pham
+     3/19/18
+     IT 328
+     home.html
+     Green River Project Hub home page that displays a projects table that holds
+     projects.  It also displays a button to add new projects and buttons to view
+     existing projects.
+-->
 <!DOCTYPE html>
 <html >
 <head>
@@ -52,7 +61,8 @@
         <span class="font-weight-normal">+ Add Project</span>
     </a>
     <!-- Add Project Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -66,14 +76,22 @@
                         <!-- Add Project Form Tabs -->
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active text-success" id="nav-detail-tab" data-toggle="tab"
-                                   href="#nav-detail" role="tab" aria-controls="nav-detail" aria-selected="true">Details</a>
-                                <a class="nav-item nav-link text-success" id="nav-client-tab" data-toggle="tab"
-                                   href="#nav-client" role="tab" aria-controls="nav-client" aria-selected="false">Client Info</a>
-                                <a class="nav-item nav-link text-success" id="nav-link-tab" data-toggle="tab"
-                                   href="#nav-link" role="tab" aria-controls="nav-link" aria-selected="false">Links</a>
-                                <a class="nav-item nav-link text-success" id="nav-history-tab" data-toggle="tab"
-                                   href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">History</a>
+                                <a class="nav-item nav-link active text-success" id="nav-detail-tab"
+                                   data-toggle="tab"
+                                   href="#nav-detail" role="tab" aria-controls="nav-detail"
+                                   aria-selected="true">Details</a>
+                                <a class="nav-item nav-link text-success" id="nav-client-tab"
+                                   data-toggle="tab"
+                                   href="#nav-client" role="tab" aria-controls="nav-client"
+                                   aria-selected="false">Client Info</a>
+                                <a class="nav-item nav-link text-success" id="nav-link-tab"
+                                   data-toggle="tab"
+                                   href="#nav-link" role="tab" aria-controls="nav-link"
+                                   aria-selected="false">Links</a>
+                                <a class="nav-item nav-link text-success" id="nav-history-tab"
+                                   data-toggle="tab"
+                                   href="#nav-history" role="tab" aria-controls="nav-history"
+                                   aria-selected="false">History</a>
                             </div>
                         </nav>
                         <!-- Add Project Form -->
@@ -97,7 +115,8 @@
                                         <label>Project Status</label>
                                         <br>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status"  value="pending" checked>
+                                            <input class="form-check-input" type="radio" name="status"
+                                                   value="pending" checked>
                                             <label class="form-check-label" for="pending">
                                                 Pending
                                             </label>
@@ -169,7 +188,8 @@
                                     </div>
                                 </div>
                                 <!-- Project Links Tab Content -->
-                                <div class="tab-pane fade" id="nav-link" role="tabpanel" aria-labelledby="nav-link-tab">
+                                <div class="tab-pane fade" id="nav-link" role="tabpanel"
+                                     aria-labelledby="nav-link-tab">
                                     <br>
                                     <div class="col-10">
                                         <!-- Site URL -->
@@ -182,33 +202,41 @@
                                                    aria-describedby="basic-addon">
                                         </div>
                                         <div id="add-url-box"></div>
-                                        <button type="button" id="add-url" class="btn btn-outline-success btn-sm btn-block">Add another URL</button>
+                                        <button type="button" id="add-url"
+                                                class="btn btn-outline-success btn-sm btn-block">
+                                            Add another URL</button>
                                         <br>
 
                                         <!-- Trello -->
                                         <label for="trello-url">Trello</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon2">https://trello.com/</span>
+                                                <span class="input-group-text"
+                                                      id="basic-addon2">https://trello.com/</span>
                                             </div>
                                             <input type="text" class="form-control" id="trello-url" name="trello[]"
                                                    aria-describedby="basic-addon2">
                                         </div>
                                         <div id="add-trello-box"></div>
-                                        <button type="button" id="add-trello" class="btn btn-outline-success btn-sm btn-block">Add another URL</button>
+                                        <button type="button" id="add-trello"
+                                                class="btn btn-outline-success btn-sm btn-block">
+                                            Add another URL</button>
                                         <br>
 
                                         <!-- GitHub -->
                                         <label for="github-url">GitHub</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="basic-addon3">https://github.com/</span>
+                                                <span class="input-group-text" id="basic-addon3">
+                                                    https://github.com/</span>
                                             </div>
                                             <input type="text" class="form-control" id="github-url" name="github[]"
                                                    aria-describedby="basic-addon3">
                                         </div>
                                         <div id="add-github-box"></div>
-                                        <button type="button" id="add-github" class="btn btn-outline-success btn-sm btn-block">Add another URL</button>
+                                        <button type="button" id="add-github"
+                                                class="btn btn-outline-success btn-sm btn-block">
+                                            Add another URL</button>
                                         <br>
 
                                         <!-- Login Credentials -->
@@ -337,7 +365,8 @@
                         <td class="text-capitalize">{{ @project['client'] }}</td>
                         <td>{{ @project['description'] }}</td>
                         <td class="text-capitalize">{{ @project['status'] }}</td>
-                        <td><a class="btn btn-success btn-sm" href="{{ @BASE }}/{{ @project['title'] }}" role="button">View Project</a></td>
+                        <td><a class="btn btn-success btn-sm" href="{{ @BASE }}/{{ @project['title'] }}"
+                               role="button">View Project</a></td>
                     </tr>
                 </repeat>
                 </tbody>
@@ -466,41 +495,5 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="js/home.js"></script>
-
-<script>
-    //add another site url
-    $("#add-url").click(function() {
-        $("#add-url-box").append("<div class=\"input-group mb-3\">" +
-                                    "<div class=\"input-group-prepend\">\n" +
-                                        "<span class=\"input-group-text\" id=\"basic-addon\">https://</span>\n" +
-                                    "</div>\n" +
-                                        "<input type=\"text\" class=\"form-control\" id=\"basicurl\" name=\"siteurl[]\"\n" +
-                                        "aria-describedby=\"basic-addon\">\n" +
-                                    "</div>");
-    });
-
-    //add another trello url
-    $("#add-trello").click(function() {
-        $("#add-trello-box").append("<div class=\"input-group mb-3\">" +
-                                        "<div class=\"input-group-prepend\">\n" +
-                                            "<span class=\"input-group-text\" id=\"basic-addon2\">https://trello.com/</span>\n" +
-                                        "</div>\n" +
-                                            "<input type=\"text\" class=\"form-control\" id=\"trello-url\" name=\"trello[]\"\n" +
-                                            "aria-describedby=\"basic-addon2\">\n" +
-                                    "</div>");
-    });
-
-    //add another github url
-    $("#add-github").click(function() {
-        $("#add-github-box").append("<div class=\"input-group mb-3\">" +
-                                        "<div class=\"input-group-prepend\">\n" +
-                                            "<span class=\"input-group-text\" id=\"basic-addon3\">https://github.com/</span>\n" +
-                                        "</div>\n" +
-                                            "<input type=\"text\" class=\"form-control\" id=\"github-url\" name=\"github[]\"\n" +
-                                            "aria-describedby=\"basic-addon3\">\n" +
-                                    "</div>");
-    });
-</script>
-
 </body>
 </html>

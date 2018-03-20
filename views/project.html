@@ -1,3 +1,12 @@
+<!-- Ryan Marlow
+     Cynthia Pham
+     3/19/18
+     IT 328
+     project.html
+     Project page that displays a specific project and its fields.  It turns
+     editable once the user clicks on the edit button and saves changes once saved.
+-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +96,8 @@
                         </div>
                     </repeat>
                     <div id="add-link"></div>
-                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button" id="link-button">Add Site URL</button>
+                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button"
+                            id="link-button">Add Site URL</button>
                     <br />
                     <p>Trello:</p>
                     <repeat group="{{ @project->getTrello() }}" value="{{ @link }}">
@@ -99,7 +109,8 @@
                         </div>
                     </repeat>
                     <div id="add-trello"></div>
-                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button" id="trello-button">Add Trello</button>
+                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button"
+                            id="trello-button">Add Trello</button>
                     <br />
                     <p>GitHub:</p>
                     <repeat group="{{ @project->getGitHub() }}" value="{{ @link }}">
@@ -112,7 +123,8 @@
                         </div>
                     </repeat>
                     <div id="add-github"></div>
-                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button" id="github-button">Add GitHub</button>
+                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button"
+                            id="github-button">Add GitHub</button>
                     <br />
                     <h6>Login Credentials:</h6>
                     <hr>
@@ -121,52 +133,76 @@
                         <span id="password" class="edit">{{ @project->getPassword() }}</span>
                     </p>
                     <p>
-                        <input type="text" class="form-control" id="username-input" name="username" placeholder="Username">
-                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-username-button">Add Username</button></span>
-                        <input type="text" class="form-control" id="password-input" name="password" placeholder="Password">
-                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-password-button">Add Password</button></span>
+                        <input type="text" class="form-control" id="username-input" name="username"
+                               placeholder="Username">
+                        <span><button type="button" class="btn btn-outline-success btn-sm"
+                                      id="add-username-button">Add Username</button></span>
+                        <input type="text" class="form-control" id="password-input" name="password"
+                               placeholder="Password">
+                        <span><button type="button" class="btn btn-outline-success btn-sm"
+                                      id="add-password-button">Add Password</button></span>
                     </p>
                 </div>
                 <div class="col-sm">
                     <h6>Client Info:</h6>
                     <hr>
                     <p id="client" class="edit">{{ @project->getClient() }}</p>
-                    <input type="text" class="form-control" id="client-input" name="client" placeholder="Client/Company Name">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-client-button">Add Client/Company Name</button>
+                    <input type="text" class="form-control" id="client-input"
+                           name="client" placeholder="Client/Company Name">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-client-button">Add Client/Company Name</button>
                     <p id="location" class="edit">{{ @project->getLocation() }}</p>
-                    <input type="text" class="form-control" id="location-input" name="location" placeholder="Location">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-location-button">Add Location</button>
+                    <input type="text" class="form-control" id="location-input"
+                           name="location" placeholder="Location">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-location-button">Add Location</button>
                     <p id="contactname" class="edit">{{ @project->getContactname() }}</p>
-                    <input type="text" class="form-control" id="contactname-input" name="contactname" placeholder="Contact Name">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-contactname-button">Add Contact Name</button>
+                    <input type="text" class="form-control" id="contactname-input"
+                           name="contactname" placeholder="Contact Name">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-contactname-button">Add Contact Name</button>
                     <p id="contactemail" class="edit">{{ @project->getContactemail() }}</p>
-                    <input type="text" class="form-control" id="contactemail-input" name="contactemail" placeholder="Contact Email">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-contactemail-button">Add Contact Email</button>
+                    <input type="text" class="form-control" id="contactemail-input"
+                           name="contactemail" placeholder="Contact Email">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-contactemail-button">Add Contact Email</button>
                     <p id="contactphone" class="edit">{{ @project->getContactphone() }}</p>
-                    <input type="text" class="form-control" id="contactphone-input" name="contactphone" placeholder="Contact Phone">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-contactphone-button">Add Contact Phone</button>
+                    <input type="text" class="form-control" id="contactphone-input"
+                           name="contactphone" placeholder="Contact Phone">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-contactphone-button">Add Contact Phone</button>
                     <p id="companyurl" class="edit">{{ @project->getCompanyurl() }}</p>
-                    <input type="text" class="form-control" id="companyurl-input" name="companyurl" placeholder="Company URL">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-companyurl-button">Add Company URL</button>
+                    <input type="text" class="form-control" id="companyurl-input"
+                           name="companyurl" placeholder="Company URL">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-companyurl-button">Add Company URL</button>
                 </div>
                 <div class="col-sm">
                     <h6>Project History:</h6>
                     <hr>
                     <p id="class" class="edit">{{ @project->getClass() }}</p>
-                    <input type="text" class="form-control" id="class-input" name="class" placeholder="IT Class">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-class-button">Add IT Class</button>
+                    <input type="text" class="form-control" id="class-input" name="class"
+                           placeholder="IT Class">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-class-button">Add IT Class</button>
                     <p id="instructor" class="edit">{{ @project->getInstructor() }}</p>
-                    <input type="text" class="form-control" id="instructor-input" name="instructor" placeholder="Instructor Name">
-                    <button type="button" class="btn btn-outline-success btn-sm" id="add-instructor-button">Add Instructor Name</button>
+                    <input type="text" class="form-control" id="instructor-input" name="instructor"
+                           placeholder="Instructor Name">
+                    <button type="button" class="btn btn-outline-success btn-sm"
+                            id="add-instructor-button">Add Instructor Name</button>
                     <p>
                         <span id="quarter" class="edit">{{ @project->getQuarter() }}</span>
                         <span id="year" class="edit">{{ @project->getYear() }}</span>
                     </p>
                     <p>
-                        <input type="text" class="form-control" id="quarter-input" name="quarter" placeholder="Quarter">
-                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-quarter-button">Add Quarter</button></span>
-                        <input type="text" class="form-control" id="year-input" name="year" placeholder="Year">
-                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-year-button">Add Year</button></span>
+                        <input type="text" class="form-control" id="quarter-input" name="quarter"
+                               placeholder="Quarter">
+                        <span><button type="button" class="btn btn-outline-success btn-sm"
+                                      id="add-quarter-button">Add Quarter</button></span>
+                        <input type="text" class="form-control" id="year-input" name="year"
+                               placeholder="Year">
+                        <span><button type="button" class="btn btn-outline-success btn-sm"
+                                      id="add-year-button">Add Year</button></span>
                     </p>
                     <hr>
                     <h6>Notes:</h6>
@@ -184,7 +220,8 @@
             <form method="POST" action="./{{ @project->getTitle() }}">
 
             <!-- Modal -->
-            <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="deleteProjectLabel" aria-hidden="true">
+            <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog"
+                 aria-labelledby="deleteProjectLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -208,7 +245,8 @@
             <hr>
             <div class="row">
                 <div class="col align-self-start">
-                    <button type="button" class="btn btn-success btn-sm float-left" data-toggle="modal" data-target="#deleteProject">
+                    <button type="button" class="btn btn-success btn-sm float-left"
+                            data-toggle="modal" data-target="#deleteProject">
                         Delete Project
                     </button>
                 </div>

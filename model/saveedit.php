@@ -1,15 +1,26 @@
 <?php
 /**
+ * saveedit.php handles the editing of projects via Ajax/JS and html editable content.
+ *
+ * Receives POST values from Ajax call in js/edit.js and saves into php variables.
+ * The variables are then used to add links into links database table and update
+ * projects in projects database tables
+ *
  * @author Ryan Marlow <rmarlow@mail.greenriver.edu>
+ * @author Cynthia Pham <cpham15@mail.greenriver.edu>
+ * @copyright 2018
  * @version 1.0
  *
- * This file handles the editing of projects via Ajax/JS and html editable content.
  */
 require('/home/rmarlowg/config.php');
 require('../model/db.php');
 require_once ('../model/validation.php');
 
+
+//Connects to database
 $dbh = connect();
+
+//Saves POST values from Ajax call in js/edit.js into variables
 $title = $_POST['title'];
 $description = $_POST['description'];
 $client = $_POST['client'];
@@ -39,6 +50,7 @@ $newNotes = $_POST['newNotes'];
 //$oldNotes = $_POST['oldNotes'];
 $updatedNotes = $_POST['updatedNotes'];
 
+//gets project id using project title
 $project_id = getProjectLinkId($title);
 
 

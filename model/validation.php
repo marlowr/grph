@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * validation.php holds the codes for both (PHP/JavaScript) validation.
+ *
+ * Validates site URL, trello, github links to its proper format.
+ * @author Ryan Marlow <rmarlow@mail.greenriver.edu>
+ * @author Cynthia Pham <cpham15@mail.greenriver.edu>
+ * @copyright 2018
+ * @version 1.0
+ */
     $linkArray = array("http://", "https://", "www.", "http://www.", "https://www.");
     $trelloArray = array("http://trello.com/", "https://trello.com/", "www.trello.com/",
         "http://www.trello.com/", "trello.com/", "https://www.trello/");
@@ -7,8 +15,10 @@
         "http:www//github.com/", "github.com/", "https://www.github.com/");
 
     /**
-     * @param $link
-     * @return mixed|string
+     * Validates site URL according to format. Changes URL to proper
+     * "https://www./" format
+     * @param $siteurl Site URL link
+     * @return String $siteurl Site URL in proper format
      */
     function trimLink($link) {
 
@@ -30,8 +40,10 @@
     }
 
     /**
-     * @param $trello
-     * @return mixed|string
+     * Validates trello according to format. Changes URL to proper
+     * "https://www.trello.com/" format
+     * @param $trello Trello link
+     * @return String $trello Trello URL in proper format
      */
     function trimTrello($trello) {
 
@@ -52,8 +64,10 @@
     }
 
     /**
-     * @param $github
-     * @return mixed|string
+     * Validates github according to format. Changes URL to proper
+     * "https://www.github.com/" format
+     * @param $github Github link
+     * @return String $github Github URL in proper format
      */
     function trimGitHub($github) {
 
@@ -77,8 +91,11 @@
     //PHP Validation
 
     /**
-     * @param $title
-     * @return string
+     * Validates project's title
+     *
+     * Validates to see if project's title is not null. If not, it will print error message.
+     * @param $title Project's title
+     * @return String error message that reads "Project title is required"
      */
     function validateTitle($title) {
         if($title != null)
@@ -88,8 +105,12 @@
     }
 
     /**
-     * @param $client
-     * @return string
+     * Validates project client's name
+     *
+     * Validates to see if client's name is not null. Accepts alphabetical letters only.
+     * If it doesn't validate, it will print error message.
+     * @param $client Project client's name
+     * @return String error message that reads "Client's name needs to only be alphabetical."
      */
     function validateClient($client)
     {
@@ -103,8 +124,13 @@
     }
 
     /**
-     * @param $description
-     * @return string
+     * Validates project description
+     *
+     * Validates to see if description is not null.  Accepts descriptions whose
+     * string length is longer than 10 characters.  If it doesn't validate, it will
+     * print error message
+     * @param $description Project's description
+     * @return String error message that reads "Project description needs to be at least 10 characters long."
      */
     function validateDesc($description) {
 
