@@ -6,7 +6,6 @@
     <base target="_self">
     <meta name="description" content="A Hub for Green River Projects." />
     <meta name="google" value="notranslate">
-    <link rel="shortcut icon" href="/images/cp_ico.png">
 
     <!--stylesheets / link tags loaded here-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
@@ -53,54 +52,136 @@
     <?php else: ?>
         <div class="container project-display">
             <br>
-            <h1 class="w-50 text-capitalize" id="title"><?= ($project['title']) ?></h1>
-            <h6 class="mb-2 text-muted text-capitalize edit" contenteditable="false" id="status"><?= ($project['status']) ?></h6>
-            <p class="edit text-capitalize" contenteditable="false" id="description"><?= ($project['description']) ?></p>
+            <h1 class="w-50 text-capitalize" id="title"><?= ($project->getTitle()) ?></h1>
+            <h6 class="mb-2 text-muted text-capitalize" id="status"><?= ($project->getStatus()) ?></h6>
+            <div class="btn-group btn-group-toggle" id="status-bar" data-toggle="buttons">
+              <label class="btn btn-outline-success" id="active">
+                <input type="radio" name="status" value="active" autocomplete="off"> Active
+              </label>
+              <label class="btn btn-outline-success" id="pending">
+                <input type="radio" name="status" value="pending" autocomplete="off"> Pending
+              </label>
+              <label class="btn btn-outline-success" id="maintenance">
+                <input type="radio" name="status" value="maintenance" autocomplete="off"> Maintenance
+              </label>
+              <label class="btn btn-outline-success" id="retired">
+                <input type="radio" name="status" value="retired" autocomplete="off" checked=""> Retired
+              </label>
+            </div>
+            <br>
+            <p class="edit w-50" id="description"><?= ($project->getDescription()) ?></p>
+            <input type="text" class="form-control" id="description-input" name="description" placeholder="Description">
+            <button type="button" class="btn btn-outline-success btn-sm" id="add-description-button">Add Description</button>
+            <br>
             <div class="row">
                 <div class="col-sm">
                     <!-- Display Links -->
                     <h6>Links:</h6>
                     <hr>
                     <p>Site URL:</p>
-                    <?php foreach (($links?:[]) as $link): ?>
-                        <?php if ($link['type']=='siteurl'): ?>
-                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
-                        <?php endif; ?>
+                    <?php foreach (($project->getSiteURL()?:[]) as $link): ?>
+                        <div class="link">
+                            <a class="siteurl linkclass" href="<?= ($link) ?>"><?= ($link) ?></a>
+                            <br>
+                            <button type="button" class="btn btn-sm delete-link-button float-left">Delete</button>
+                            <br>
+                        </div>
                     <?php endforeach; ?>
-                    <br>
+                    <div id="add-link"></div>
+                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button" id="link-button">Add Site URL</button>
+                    <br />
                     <p>Trello:</p>
-                    <?php foreach (($links?:[]) as $link): ?>
-                        <?php if ($link['type']=='trello'): ?>
-                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
-                        <?php endif; ?>
+                    <?php foreach (($project->getTrello()?:[]) as $link): ?>
+                        <div class="link">
+                            <a class="trello linkclass" href="<?= ($link) ?>"><?= ($link) ?></a>
+                            <br>
+                            <button type="button" class="btn btn-sm delete-link-button float-left">Delete</button>
+                            <br>
+                        </div>
                     <?php endforeach; ?>
-                    <br>
+                    <div id="add-trello"></div>
+                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button" id="trello-button">Add Trello</button>
+                    <br />
                     <p>GitHub:</p>
-                    <?php foreach (($links?:[]) as $link): ?>
-                        <?php if ($link['type']=='github'): ?>
-                            <a class="edit" href="<?= ($link['url']) ?>"><?= ($link['url']) ?></a><br>
-                        <?php endif; ?>
+                    <?php foreach (($project->getGitHub()?:[]) as $link): ?>
+                        <div class="link">
+                            <a class="github linkclass" href="<?= ($link) ?>"><?= ($link) ?></a>
+                            <br>
+                            <button type="button" class="btn btn-sm delete-link-button float-left"
+                                    id="delete-button">Delete</button>
+                            <br>
+                        </div>
                     <?php endforeach; ?>
+                    <div id="add-github"></div>
+                    <button type="button" class="btn btn-outline-success btn-sm btn-block add-link-button" id="github-button">Add GitHub</button>
+                    <br />
+                    <h6>Login Credentials:</h6>
+                    <hr>
+                    <p>
+                        <span id="username" class="edit"><?= ($project->getLogin()) ?></span>
+                        <span id="password" class="edit"><?= ($project->getPassword()) ?></span>
+                    </p>
+                    <p>
+                        <input type="text" class="form-control" id="username-input" name="username" placeholder="Username">
+                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-username-button">Add Username</button></span>
+                        <input type="text" class="form-control" id="password-input" name="password" placeholder="Password">
+                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-password-button">Add Password</button></span>
+                    </p>
                 </div>
                 <div class="col-sm">
                     <h6>Client Info:</h6>
                     <hr>
-                    <p id="client" class="edit"><?= ($project['client']) ?></p>
-                    <p class="edit"><?= ($project['location']) ?></p>
-                    <p class="edit"><?= ($project['contactname']) ?></p>
-                    <p class="edit"><?= ($project['contactemail']) ?></p>
-                    <p class="edit"><?= ($project['contactphone']) ?></p>
-                    <p class="edit"><?= ($project['companyurl']) ?></p>
+                    <p id="client" class="edit"><?= ($project->getClient()) ?></p>
+                    <input type="text" class="form-control" id="client-input" name="client" placeholder="Client/Company Name">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-client-button">Add Client/Company Name</button>
+                    <p id="location" class="edit"><?= ($project->getLocation()) ?></p>
+                    <input type="text" class="form-control" id="location-input" name="location" placeholder="Location">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-location-button">Add Location</button>
+                    <p id="contactname" class="edit"><?= ($project->getContactname()) ?></p>
+                    <input type="text" class="form-control" id="contactname-input" name="contactname" placeholder="Contact Name">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-contactname-button">Add Contact Name</button>
+                    <p id="contactemail" class="edit"><?= ($project->getContactemail()) ?></p>
+                    <input type="text" class="form-control" id="contactemail-input" name="contactemail" placeholder="Contact Email">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-contactemail-button">Add Contact Email</button>
+                    <p id="contactphone" class="edit"><?= ($project->getContactphone()) ?></p>
+                    <input type="text" class="form-control" id="contactphone-input" name="contactphone" placeholder="Contact Phone">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-contactphone-button">Add Contact Phone</button>
+                    <p id="companyurl" class="edit"><?= ($project->getCompanyurl()) ?></p>
+                    <input type="text" class="form-control" id="companyurl-input" name="companyurl" placeholder="Company URL">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-companyurl-button">Add Company URL</button>
                 </div>
                 <div class="col-sm">
                     <h6>Project History:</h6>
                     <hr>
-                    <?php foreach (($notes?:[]) as $note): ?>
-                            <p><?= ($note['note']) ?></p>
+                    <p id="class" class="edit"><?= ($project->getClass()) ?></p>
+                    <input type="text" class="form-control" id="class-input" name="class" placeholder="IT Class">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-class-button">Add IT Class</button>
+                    <p id="instructor" class="edit"><?= ($project->getInstructor()) ?></p>
+                    <input type="text" class="form-control" id="instructor-input" name="instructor" placeholder="Instructor Name">
+                    <button type="button" class="btn btn-outline-success btn-sm" id="add-instructor-button">Add Instructor Name</button>
+                    <p>
+                        <span id="quarter" class="edit"><?= ($project->getQuarter()) ?></span>
+                        <span id="year" class="edit"><?= ($project->getYear()) ?></span>
+                    </p>
+                    <p>
+                        <input type="text" class="form-control" id="quarter-input" name="quarter" placeholder="Quarter">
+                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-quarter-button">Add Quarter</button></span>
+                        <input type="text" class="form-control" id="year-input" name="year" placeholder="Year">
+                        <span><button type="button" class="btn btn-outline-success btn-sm" id="add-year-button">Add Year</button></span>
+                    </p>
+
+                    <?php foreach (($project->getProjectNotes()?:[]) as $note): ?>
+                        <div class="notediv">
+                            <p class="note noteclass"><?= ($note) ?></p>
+                            <button type="button" class="btn btn-sm delete-note-button float-left">Delete</button>
+                            <br>
+                        </div>
                     <?php endforeach; ?>
+                    <div id="add-note"></div>
+                    <button type="button" class="btn btn-success btn-sm" id="add-note-button">Add Note</button>
                 </div>
             </div>
-            <form method="POST" action="./<?= ($project['title']) ?>">
+            <form method="POST" action="./<?= ($project->getTitle()) ?>">
 
             <!-- Modal -->
             <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog" aria-labelledby="deleteProjectLabel" aria-hidden="true">
@@ -113,7 +194,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            Are you sure you want to delete <?= ($project['title']) ?>?
+                            Are you sure you want to delete <?= ($project->getTitle()) ?>?
                         </div>
                         <div class="modal-footer">
                             <input type="submit" id="delete" name="delete"
@@ -146,5 +227,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="../grph/js/edit.js"></script>
+
+
 </body>
 </html>

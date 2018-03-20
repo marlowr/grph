@@ -135,3 +135,11 @@ div.project {
 .project-display {
     border: 1px solid #dee2e6;
 }
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+
+.showedit {
+    border-bottom: 1px solid orangered;
+}

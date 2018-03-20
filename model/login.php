@@ -6,7 +6,7 @@
  *
  * This php file provides functionality of the login
  */
-require_once('/home/cphamgre/config.php');
+require_once('/home/rmarlowg/config.php');
 require_once ('model/db.php');
 
 function login($username, $password) {

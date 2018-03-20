@@ -241,7 +241,7 @@
                                             <select class="form-control" id="class"
                                                     name="class">
                                                 <option>Choose...</option>
-                                                <option>IT 128 - Full Stack Web Dev</option>
+                                                <option>IT 328 - Full Stack Web Dev</option>
                                                 <option>IT 333 - Data Structure & Algorithms</option>
                                                 <option>IT 355 - Agile Dev Methods</option>
                                                 <option>IT 405 - Mobile Dev Frameworks</option>

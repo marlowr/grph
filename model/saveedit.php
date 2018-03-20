@@ -5,7 +5,7 @@
  *
  * This file handles the editing of projects via Ajax/JS and html editable content.
  */
-require('/home/cphamgre/config.php');
+require('/home/rmarlowg/config.php');
 require('../model/db.php');
 require_once ('../model/validation.php');
 

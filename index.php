@@ -1,14 +1,14 @@
 <?php
-/* Ryan Marlow / Cynthia Pham
+/** Ryan Marlow / Cynthia Pham
    IT 328 Final Project - Green River Project Hub
    index.php
 */
 //Require the autoload file
-error_reporting(E_ALL);
-ini_set('display_errors',TRUE);
+//error_reporting(E_ALL);
+//ini_set('display_errors',TRUE);
 session_start();
 require_once ('vendor/autoload.php');
-require_once('/home/cphamgre/config.php');
+require_once('/home/rmarlowg/config.php');
 require_once ('model/db.php');
 require_once ('model/login.php');
 require_once ('model/validation.php');
@@ -80,18 +80,20 @@ $f3->route('GET|POST /home', function($f3) {
             }
 
             //insert the project into the DB
-            $project_id = addProject($title, $description, $client, $login, $password, $status,
+
+            $project = new Project($title, $description, $client, $login, $password, $status,
                 $location, $companyurl, $contactname, $contactemail, $contactphone, $instructor,
                 $class, $quarter, $years);
+            $project->addProject();
+            $project->addNote($notes);
 
-            addNote($notes,$project_id);
             //if admin enters a trello link, it adds to links database table if it doesn't exist
             if (!empty($trello)) {
 
                 foreach ($trello as $link) {
                     if ($link != "") {
                         $link = trimTrello($link);
-                        addLink("trello", $link, $project_id);
+                        $project->addLink("trello", $link);
                     }
                 }
             }
@@ -101,7 +103,7 @@ $f3->route('GET|POST /home', function($f3) {
                 foreach ($github as $link) {
                     if ($link != "") {
                         $link = trimGitHub($link);
-                        addLink("github", $link,$project_id);
+                        $project->addLink("github", $link);
                     }
                 }
             }
@@ -111,7 +113,7 @@ $f3->route('GET|POST /home', function($f3) {
                 foreach ($siteurl as $link) {
                     if ($link != "") {
                         $link = trimLink($link);
-                        addLink("siteurl", $link, $project_id);
+                        $project->addLink("siteurl", $link);
                     }
 
                 }
@@ -130,8 +132,16 @@ $f3->route('POST|GET /@title', function($f3, $params) {
     if($_SESSION['logged']) {
         $title = $params['title'];
         $project = getProject($title);
-        $links = getLinks($project['project_id']);
-        $notes = getNotes($project['project_id']);
+
+        $editProject = new EditProject($project['title'], $project['description'], $project['client'],
+            $project['login'], $project['password'], $project['status'],$project['location'], $project['companyurl'],
+            $project['contactname'], $project['contactemail'], $project['contactphone'], $project['instructor'],
+            $project['class'], $project['quarter'], $project['years'],$project['project_id']);
+
+        $editProject->getLinks();
+        $editProject->getNotes();
+        //$links = getLinks($project['project_id']);
+        //$notes = getNotes($project['project_id']);
 
         //If the project has just been deleted, show message.
         if($_POST['delete'] == 'Delete Project') {
@@ -139,33 +149,14 @@ $f3->route('POST|GET /@title', function($f3, $params) {
             $f3->set('message','Project Deleted');
         }
 
-        $f3->set('project', $project);
-        $f3->set('links',$links);
-        $f3->set('notes',$notes);
+        $f3->set('project', $editProject);
+        //$f3->set('links',$links);
+        //$f3->set('notes',$notes);
         echo Template::instance()->render('views/project.html');
     } else {
         $f3->reroute("./");
     }
 });
-
-$f3->route('POST|GET /edit', function($f3, $params) {
-    if($_SESSION['logged']) {
-        print_r($_POST);
-        $title = $params['title'];
-        //If the project has just been deleted, show message.
-        if($_POST['delete'] == 'Delete Project') {
-            removeProject($title);
-            $f3->set('message','Project Deleted');
-        }
-        $project = getProject($title);
-        $f3->set('project', $project);
-        echo Template::instance()->render('views/project.html');
-    } else {
-        $f3->reroute("./");
-    }
-});
-
-
 
 //Run fat free
 $f3->run();

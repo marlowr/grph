@@ -1,9 +1,10 @@
 //This file handles the editing of projects through Ajax via html content editable.
 
 $(document).ready(function() {
-
     //hides all content add buttons
     $(".add-link-button").hide();
+    $(".delete-link-button").hide();
+    $(".delete-note-button").hide();
     $("#add-note-button").hide();
     $("#add-description-button").hide();
     $("#add-username-button").hide();
@@ -36,13 +37,40 @@ $(document).ready(function() {
     $("#year-input").hide();
 
 
+    $(".delete-link-button").click(function () {
+        var url = $(this).parent('.link').find('.linkclass').text();
+        $(this).parent('.link').remove();
+        $.ajax({
+            type: 'post',
+            url:  'model/removelink.php',
+            data:  {
+                url: url
+            }
+        });
+    });
+
+    $(".delete-note-button").click(function () {
+        var note = $(this).parent('.notediv').find('.note').text();
+        $(this).parent('.notediv').remove();
+        $.ajax({
+            type: 'post',
+            url:  'model/removenote.php',
+            data:  {
+                note: note
+            }
+        });
+    });
+
     $("#editButton").click(function () {
         var editElem = document.getElementsByClassName("edit");
+        $('.edit').addClass("alert-warning");
 
         if($("#editButton").val() == "Edit") {
 
             //shows all add-link and add-note buttons as well as status button group
             $(".add-link-button").show();
+            $(".delete-link-button").show();
+            $(".delete-note-button").show();
             $("#add-note-button").show();
             $("#status-bar").show();
 
@@ -124,7 +152,7 @@ $(document).ready(function() {
             //dynamically adds multiple notes
             $("#add-note-button").click(function() {
                 $("#add-note").append("<textarea class=\"form-control\" id=\"notes\"\n" +
-                            "name=\"notes[]\" rows=\"5\" placeholder=\"\"></textarea><br />");
+                    "name=\"notes[]\" rows=\"5\" placeholder=\"\"></textarea><br />");
             });
 
 
@@ -249,7 +277,7 @@ $(document).ready(function() {
 
             var contactphone = $("input[name=contactphone]").val();
             if (contactphone === "") {
-               contactphone = $('#contactphone').text();
+                contactphone = $('#contactphone').text();
             }
             var contactemail = $("input[name=contactemail]").val();
             if (contactemail === "") {

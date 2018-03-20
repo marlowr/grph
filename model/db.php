@@ -97,7 +97,8 @@
         global $dbh;
 
         $sql = "DELETE FROM projects WHERE project_id = :project_id;
-                DELETE FROM links WHERE project_id = :project_id;";
+                DELETE FROM links WHERE project_id = :project_id;
+                DELETE FROM notes WHERE project_id = :project_id;";
 
         //2. Prepare the statement
         $statement = $dbh->prepare($sql);
@@ -273,6 +274,36 @@
         $id = $dbh->lastInsertId();
         return $id;
     }
+
+    function removeLink($url) {
+        global $dbh;
+
+        //Define query
+        $sql = "DELETE FROM `links` WHERE url=:url;";
+
+        //prepare the statement
+        $statement = $dbh->prepare($sql);
+
+        $statement->bindParam(':url',$url, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+    }
+
+function removeNote($note) {
+    global $dbh;
+
+    //Define query
+    $sql = "DELETE FROM `notes` WHERE note=:note;";
+
+    //prepare the statement
+    $statement = $dbh->prepare($sql);
+
+    $statement->bindParam(':note',$note, PDO::PARAM_STR);
+
+    //Execute
+    $statement->execute();
+}
 
     function getLinkId($url) {
         global $dbh;
