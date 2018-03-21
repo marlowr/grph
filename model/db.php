@@ -94,6 +94,44 @@
     }
 
 /**
+ * Removes url from database based on unique url provided.
+ * @param $url
+ */
+function removeLink($url) {
+    global $dbh;
+
+    $sql = "DELETE FROM links WHERE url = :url";
+
+    //2. Prepare the statement
+    $statement = $dbh->prepare($sql);
+
+    //3. Bind parameters
+    $statement->bindParam(':url', $url, PDO::PARAM_INT);
+
+    //4. Execute the query
+    $statement->execute();
+}
+
+/**
+ * Removes note from database based on unique note provided.
+ * @param $note
+ */
+function removeNote($note) {
+    global $dbh;
+
+    $sql = "DELETE FROM notes WHERE note = :note";
+
+    //2. Prepare the statement
+    $statement = $dbh->prepare($sql);
+
+    //3. Bind parameters
+    $statement->bindParam(':note', $note, PDO::PARAM_INT);
+
+    //4. Execute the query
+    $statement->execute();
+}
+
+/**
  * Updates project information in database based on the title.
  * @param $title
  * @param $description
